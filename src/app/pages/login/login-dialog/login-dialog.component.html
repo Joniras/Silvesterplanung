@@ -1,0 +1,44 @@
+<div mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 60px;">
+    <mat-card class="loginmodal-container">
+      <h1 i18n>Anmelden</h1>
+      <br>
+      <form (ngSubmit)="doLogin(loginForm)" #loginForm="ngForm">
+        <mat-form-field class="fullWidth">
+          <input type="text" autofocus matInput autocomplete="username" required ngModel #usernameControl="ngModel" name="username" placeholder="Benutzername" i18n-placeholder="Placeholder for Username Input@@username">
+          <mat-error [hidden]="usernameControl.valid || usernameControl.pristine" i18n="Error that is shown when no username is given">
+            Gib einen Benutzernamen an
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+          <input type="password" matInput autocomplete="current-password" required ngModel name="password" placeholder="Passwort" i18n-placeholder="Plcaeholder for password Input">
+
+        </mat-form-field>
+        <a class="text-info pull-right forgotPass" [routerLink]="['/login','forgotPass']" i18n="Link underneath Login to rest password">Passwort vergessen ?</a>
+        <button  class="fullWidth" mat-raised-button="" type="submit" i18n="Button Text to Login">
+          <span class="insideLogin" [@loginText]="pendingState" i18n="@@loginText">Login</span>
+          <span class="insideLogin" [@loginPendingIcon]="pendingState" style="width: 35px"><fa-icon icon="sync" matSuffix [spin]="true" ></fa-icon></span>
+          <span style="visibility:hidden" i18n="@@loginText">Login</span>
+        </button>
+        <div>&nbsp;</div>
+      </form>
+      <hr>
+      <div class="otherLogin" fxLayout="column" fxLayoutAlign="center center"><span class="otherLoginspan" i18n="Text between Login and Social Login">oder</span>
+      </div>
+      <br>
+      <div class="otherLoginContainer" fxLayout="column" fxLayoutAlign="start stretch">
+        <a style="margin-bottom: 3px;" mat-raised-button=""  (click)="facebookLogin()" >
+          <fa-icon [icon]="['fab','facebook-f']"></fa-icon>
+          <span i18n="Facebook Social-Login Button" style="margin-left:8px">Mit Facebook anmelden</span>
+        </a>
+        <a mat-raised-button="" (click)="googleLogin()">
+          <fa-icon [icon]="['fab','google-plus-g']"></fa-icon>
+          <span i18n="Google Social-Login Button" style="margin-left:8px">Mit Google anmelden</span></a>
+      </div>
+      <br/>
+      <div class="login-help" fxLayout="column" fxLayoutAlign="center center">
+        <a  [routerLink]="['/register']" i18n="Shown in the bottom of the Login-Window">Noch keinen Account ? Jetzt Registrieren!</a>
+      </div>
+    </mat-card>
+  </div>
+</div>
