@@ -12,7 +12,7 @@
       <button mat-raised-button="" color="warn" (click)="logout()" *ngIf="user">Logout</button>
       <span class="User" *ngIf="user">
         <span>{{user?.displayName}}</span>
-        <img [src]="user?.photoURL" />
+        <img [src]="user?.photoUrl" />
       </span>
     </span>
 </div>

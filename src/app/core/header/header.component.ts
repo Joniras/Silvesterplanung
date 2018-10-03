@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../services/auth.service";
-import {MatDialog} from "@angular/material";
-import {LoginDialogComponent} from "../pages/login/login-dialog/login-dialog.component";
+import {MatDialog} from '@angular/material';
+import {LoginDialogComponent} from '../login-dialog/login-dialog.component';
+import {AuthService} from '../../services/auth.service';
+import {UserProfile} from '../interfaces';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,12 @@ import {LoginDialogComponent} from "../pages/login/login-dialog/login-dialog.com
 })
 export class HeaderComponent implements OnInit {
 
-  public user = null;
+  public user: UserProfile = null;
   public checkingIfAlreadyLoggedIn = true;
 
-  constructor( private authenticator: AuthService, private dialog: MatDialog) {
-    this.authenticator.getUser().subscribe(v => {
+  constructor(private authenticator: AuthService, private dialog: MatDialog) {
+    this.authenticator.getUserObservable().subscribe(v => {
+      console.log("user:",v);
       this.user = v;
       this.checkingIfAlreadyLoggedIn = false;
     });

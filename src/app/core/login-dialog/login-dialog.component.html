@@ -7,8 +7,8 @@
           <br>
           <form (ngSubmit)="doLogin(loginForm)" #loginForm="ngForm">
             <mat-form-field class="fullWidth">
-              <input type="email" email autofocus matInput autocomplete="username" required ngModel #usernameControl="ngModel" name="username" placeholder="Email">
-              <mat-error [hidden]="usernameControl.valid || usernameControl.pristine" >
+              <input type="email" email autofocus matInput autocomplete="email" required ngModel #emailControl="ngModel" name="email" placeholder="Email">
+              <mat-error [hidden]="emailControl.valid || emailControl.pristine" >
                 Gib deine Email an
               </mat-error>
             </mat-form-field>
@@ -82,6 +82,12 @@
                 Gib einen längeren Namen an
               </mat-error>
             </mat-form-field>
+            <span fxLayout="column" fxLayoutAlign="start stretch" *ngIf="registeringWithEmail">
+              <span fxFlexOffset="10px">Du hast die Ehre, eine URL eines Bildes anzugeben (E-Mail Variante nutzt eh keiner)</span>
+            <mat-form-field>
+              <input type="url" matInput="" placeholder="Url des Bildes (nicht allzu hochauflösend)" name="url" ngModel>
+            </mat-form-field>
+            </span>
             <button  class="fullWidth" mat-raised-button="" type="submit" color="primary" fxFlexOffset="20px" >
               <span class="insideLogin" [@loginText]="pendingAddState" >Fertigstellen</span>
               <span class="insideLogin" [@loginPendingIcon]="pendingAddState" style="width: 35px"><fa-icon icon="sync" matSuffix [spin]="true" ></fa-icon></span>
