@@ -1,0 +1,18 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <span>Silvester 2018/19</span>
+  <span>
+      <a [routerLink]="['/book']">Buchen</a>
+      <a [routerLink]="['/gallery']">Gallerie</a>
+      <a [routerLink]="['/contact']">Anfahrt</a>
+      <a [routerLink]="['/wishes']">Getränkewünsche</a>
+      <button mat-raised-button="" color="primary" (click)="login()" *ngIf="!user">
+        <span *ngIf="!checkingIfAlreadyLoggedIn">Login</span>
+        <fa-icon icon="sync" [spin]="true" *ngIf="checkingIfAlreadyLoggedIn"></fa-icon>
+      </button>
+      <button mat-raised-button="" color="warn" (click)="logout()" *ngIf="user">Logout</button>
+      <span class="User" *ngIf="user">
+        <span>{{user?.displayName}}</span>
+        <img [src]="user?.photoURL" />
+      </span>
+    </span>
+</div>
