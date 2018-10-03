@@ -1,17 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <span>Silvester 2018/19</span>
-    <span>
-      <a [routerLink]="['/book']">Buchen</a>
-      <a [routerLink]="['/gallery']">Gallerie</a>
-      <a [routerLink]="['/contact']">Anfahrt</a>
-      <a [routerLink]="['/wishes']">Getränkewünsche</a>
-      <a [routerLink]="['/login']">Login</a>
-      <button mat-raised-button="" color="primary" (click)="login()">Login</button>
-      <button mat-raised-button="" color="warn" (click)="logout()">Logout</button>
-      <a [routerLink]="['/register']">Registrieren</a>
-    </span>
-  </div>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
 <simple-notifications></simple-notifications>

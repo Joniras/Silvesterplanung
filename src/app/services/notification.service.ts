@@ -11,6 +11,9 @@ export class NotificationService {
   }
 
   public show(message: string, type: NotificationType, content?: string) {
-    this.notifications.create(message, content ? content : '', type);
+    this.notifications.create(message, content ? content : '', type, {
+      timeOut: 3000,
+      showProgressBar: false
+    });
   }
 }

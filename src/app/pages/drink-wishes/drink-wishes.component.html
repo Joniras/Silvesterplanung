@@ -1,3 +1,24 @@
-<p>
-  drink-wishes works!
-</p>
+<span fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-list>
+  <mat-list-item *ngFor="let wish of (wishes|async)">
+    {{wish.data.name}}
+    <br/>
+    {{(wish.data.creator | async)?.displayName}}
+    <br/>
+    <span>{{(wish.data.votes | async)?.length}} Votes
+    </span>
+    <br/>
+    <img [src]="(wish.data.creator|async)?.photoUrl">
+    <mat-button-toggle (click)="like(wish)" [checked]="(wish.data.voted|async)"><fa-icon icon="heart"></fa-icon></mat-button-toggle>
+  </mat-list-item>
+  <mat-list-item>
+    <form fxLayout="row">
+      <mat-form-field>
+        <input type="text" matInput="" placeholder="Name" #name>
+      </mat-form-field>
+      <button type="submit" (click)="addWish(name.value)"><fa-icon icon="plus" ></fa-icon></button>
+    </form>
+  </mat-list-item>
+</mat-list>
+</span>
+

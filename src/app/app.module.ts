@@ -27,9 +27,12 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {faSync} from '@fortawesome/free-solid-svg-icons/faSync';
 import {faGooglePlusG} from '@fortawesome/free-brands-svg-icons/faGooglePlusG';
 import {faFacebookF} from '@fortawesome/free-brands-svg-icons/faFacebookF';
-import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
+import { SimpleNotificationsModule} from 'angular2-notifications';
 import {AuthService} from './services/auth.service';
 import {NotificationService} from './services/notification.service';
+import {SameValueDirective} from "./services/sameValueAsDirective";
+import { HeaderComponent } from './header/header.component';
+import {faHeart, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 @NgModule({
   declarations: [
@@ -43,6 +46,8 @@ import {NotificationService} from './services/notification.service';
     BookingComponent,
     WelcomeComponent,
     LoginDialogComponent,
+    SameValueDirective,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,4 +72,4 @@ export class AppModule {
 }
 
 library.add(
-  faSync, faFacebookF, faGooglePlusG);
+  faSync, faFacebookF, faGooglePlusG, faPlus, faHeart);

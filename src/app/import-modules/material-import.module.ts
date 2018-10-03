@@ -1,5 +1,13 @@
 import {NgModule} from '@angular/core';
-import {MAT_DATE_LOCALE, MatButtonModule, MatCardModule, MatDialogModule, MatInputModule} from '@angular/material';
+import {
+  MAT_DATE_LOCALE,
+  MatButtonModule, MatButtonToggleModule,
+  MatCardModule,
+  MatDialogModule,
+  MatInputModule, MatListModule,
+  MatSlideToggleModule,
+  MatTabsModule
+} from '@angular/material';
 import {CommonModule} from '@angular/common';
 
 @NgModule({
@@ -7,13 +15,22 @@ import {CommonModule} from '@angular/common';
     CommonModule,
     MatInputModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule,
+    MatSlideToggleModule,
+    MatListModule,
+    MatButtonToggleModule
+
   ],
   exports: [
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule,
+    MatSlideToggleModule,
+    MatListModule,
+    MatButtonToggleModule
     ],
   declarations: [
   ],

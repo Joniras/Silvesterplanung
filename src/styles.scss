@@ -12,3 +12,24 @@ body {
 html{
   min-height: 100vh;
 }
+
+.mat-dialog-content{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+.mat-dialog-container{
+  padding: 0 !important;
+}
+
+
+app-login-dialog{
+  .mat-tab-label-container{
+    display: none;
+  }
+}
+
+.mat-slide-toggle-content{
+  width: 100%;
+}
