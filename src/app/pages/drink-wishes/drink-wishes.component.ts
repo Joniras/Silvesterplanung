@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {combineLatest, Observable, of} from 'rxjs';
 import {AuthService} from '../../services/auth.service';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {map, shareReplay, take} from 'rxjs/operators';
 
 @Component({
@@ -13,8 +12,9 @@ import {map, shareReplay, take} from 'rxjs/operators';
 export class DrinkWishesComponent implements OnInit {
   private coll_wishes: AngularFirestoreCollection<any>;
   public wishes: Observable<any[]>;
+  public user = null;
 
-  constructor(private db: AngularFirestore, private authenticator: AuthService, private auth: AngularFireAuth) {
+  constructor(private db: AngularFirestore, private authenticator: AuthService) {
     this.coll_wishes = db.collection('drink-wishes');
     // this.getWishes(this.authenticator.getUserRef());
     this.wishes = combineLatest(this.coll_wishes.snapshotChanges(), this.authenticator.getUserObservable()).pipe(map((v) => {
@@ -35,6 +35,8 @@ export class DrinkWishesComponent implements OnInit {
         });
       }
     }));
+
+    this.user = this.authenticator.getUserObservable();
   }
 
   ngOnInit() {
@@ -43,7 +45,9 @@ export class DrinkWishesComponent implements OnInit {
 
   addWish(name: string) {
     // console.log(this.authenticator.getUserId());
-    this.coll_wishes.add({name: name, creator: this.authenticator.getUser().ref});
+    if(this.authenticator.getUser()){
+      this.coll_wishes.add({name: name, creator: this.authenticator.getUser().ref});
+    }
   }
 
   like(wish) {

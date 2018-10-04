@@ -1,24 +1,41 @@
-<span fxLayout="column" fxLayoutAlign="start stretch">
-  <mat-list>
-  <mat-list-item *ngFor="let wish of (wishes|async)">
-    {{wish.data.name}}
-    <br/>
-    {{(wish.data.creator | async)?.displayName}}
-    <br/>
-    <span>{{(wish.data.votes | async)?.length}} Votes
-    </span>
-    <br/>
-    <img [src]="(wish.data.creator|async)?.photoUrl">
-    <mat-button-toggle (click)="like(wish)" [checked]="(wish.data.voted|async)"><fa-icon icon="heart"></fa-icon></mat-button-toggle>
-  </mat-list-item>
-  <mat-list-item>
-    <form fxLayout="row">
-      <mat-form-field>
-        <input type="text" matInput="" placeholder="Name" #name>
-      </mat-form-field>
-      <button type="submit" (click)="addWish(name.value)"><fa-icon icon="plus" ></fa-icon></button>
-    </form>
-  </mat-list-item>
-</mat-list>
-</span>
+<div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100%" id="wishes">
+  <div fxFlexOffset="20px" *ngIf="(wishes|async)">
+    <div class="wish" *ngFor="let wish of (wishes|async)" fxLayout="row" fxLayoutAlign="start stretch">
+      <span class="creator" fxFlex="30px">
+        <span class="creatorImg">
+          <img [src]="(wish.data.creator|async)?.photoUrl">
+        </span>
+      </span>
+      <span class="name">
+        <span>
+          {{wish.data.name}}
+        </span>
+      </span>
+      <span class="votes">
+        <span class="heart">
+          <fa-icon icon="heart" (click)="like(wish)"></fa-icon>
+          <span class="voteCount">{{(wish.data.votes | async)?.length}}</span>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="noWishes" *ngIf="!(wishes|async)?.length" fxLayout="row" fxLayoutAlign="center start">
+    <mat-card>Es wurden bisher keine Wünsche angegeben, sei der erste!</mat-card>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="addFormContainer">
+    <mat-card class="addForm" fxFlexOffset="20px">
+      <span class="notLoggedInOverlay" fxLayout="column" fxLayoutAlign="center center" *ngIf="!(user|async)">
+        <span><fa-icon icon="lock"></fa-icon> Login erforderlich</span>
+      </span>
+      <form fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field>
+          <input type="text" matInput="" placeholder="Wunsch" #name>
+        </mat-form-field>
+        <button type="submit" (click)="addWish(name.value)" mat-raised-button="" fxFlexOffset="10px">Speichern</button>
+      </form>
+    </mat-card>
+  </div>
+
+
+</div>
 

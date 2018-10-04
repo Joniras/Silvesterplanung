@@ -49,6 +49,8 @@ export class AuthService {
         console.log("Current UserState: ", user);
         if (user) {
           this.checkUID(user.uid);
+        }else{
+          this.loggedIn.next(null);
         }
       });
     }

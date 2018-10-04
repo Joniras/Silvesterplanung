@@ -4,19 +4,59 @@
   .Title{
     padding-top: 10px;
     font-size: 60px;
-    font-family: Monthoers, sans-serif;
+    font-family: Monthoers, Buxton,sans-serif;
     color: white;
     text-decoration: none;
+    letter-spacing: 1px;
   }
-
   .menu{
     font-size: 20px;
     .menuItem{
       margin-right: 15px;
-      font-family: Monthoers, sans-serif;
+      font-family: Monthoers, Buxton, sans-serif;
       text-decoration: none;
       color: white;
       cursor: pointer;
+    }
+  }
+}
+
+.menuButton{
+  height: 34px;
+  border-color: black;
+  border-radius: 5px;
+  background-color: #130033;
+  color: white;
+}
+
+.User{
+  margin-bottom: 3px;
+  padding: 5px 5px 1px 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+  .name{
+    span{
+      margin-bottom:4px;
+    }
+  }
+
+  .image{
+    img{
+      max-height: 20px;
+      border-radius: 11px;
+      border: 1px solid white;
+    }
+  }
+
+  .logoutButton{
+    margin-top: 1px;
+    button{
+      cursor: pointer;
+      background-color: #ff2424;
+      border: 1px solid black;
+      height: 20px;
+      border-radius: 7px;
+      width: 40px;
     }
   }
 }

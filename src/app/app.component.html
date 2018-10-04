@@ -1,9 +1,33 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100%">
-  <app-header></app-header>
-  <div fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="30px" fxFlex="auto" class="outerContainer">
-    <div fxFlex="80" fxFlexOffset="10" class="innerContainer">
-      <router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav [mode]="'over'" #sidenav id="sideNav" (click)="sidenav.close()">
+    <span class="menu" fxLayout="column">
+        <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
+        <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
+        <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
+        <a [routerLink]="['/wishes']" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
+        <a [routerLink]="['/prices']" class="menuItem"><span>Preise</span></a>
+        <a (click)="login()" *ngIf="!user" class="menuItem">
+          <span >login</span>
+        </a>
+      </span>
+    <span class="Login">
+      <button mat-raised-button="" color="warn" (click)="logout()" *ngIf="user">Logout</button>
+      <span class="User" *ngIf="user">
+        <span>{{user?.displayName}}</span>
+        <img [src]="user?.photoUrl" />
+      </span>
+    </span>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100vh">
+      <app-header (toggleNav)="sidenav.toggle()"></app-header>
+      <div fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="30px" fxFlex="auto" class="outerContainer">
+        <div fxFlex="80" fxFlexOffset="10" class="innerContainer" >
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
 <simple-notifications></simple-notifications>

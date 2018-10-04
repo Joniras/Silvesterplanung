@@ -1,21 +1,27 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+<div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center" class="header" fxLayout="column" fxLayoutAlign="start stretch">
   <a class="Title" [routerLink]="['/']">SILVeSTEr 18/19</a>
-  <span>
+  <button (click)="openNav()" fxHide.gt-sm class="menuButton"><fa-icon icon="bars"></fa-icon></button>
+  <span fxHide.sm fxHide.lt-sm="true" fxLayout="row" fxLayoutAlign="start center">
     <span class="menu">
-        <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
-        <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
-        <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
-        <a [routerLink]="['/wishes']" class="menuItem"><span>Getränkewünsche</span></a>
-        <a (click)="login()" *ngIf="!user" class="menuItem">
-          <span *ngIf="!checkingIfAlreadyLoggedIn">login</span>
-          <fa-icon icon="sync" [spin]="true" *ngIf="checkingIfAlreadyLoggedIn"></fa-icon>
-        </a>
-      </span>
-    <span class="Login">
-      <button mat-raised-button="" color="warn" (click)="logout()" *ngIf="user">Logout</button>
-      <span class="User" *ngIf="user">
-        <span>{{user?.displayName}}</span>
+      <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
+      <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
+      <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
+      <a [routerLink]="['/wishes']" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
+      <a [routerLink]="['/prices']" class="menuItem"><span>Preise</span></a>
+      <a (click)="login()" *ngIf="!user" class="menuItem">
+        <span *ngIf="!checkingIfAlreadyLoggedIn">login</span>
+        <fa-icon icon="sync" [spin]="true" *ngIf="checkingIfAlreadyLoggedIn"></fa-icon>
+      </a>
+    </span>
+    <span class="User" *ngIf="user" fxLayout="row" fxLayoutAlign="start stretch">
+      <span class="image" >
         <img [src]="user?.photoUrl" />
+      </span>
+      <span class="name" fxFlexOffset="5px" fxLayoutAlign="start center">
+        <span>{{user?.displayName}}</span>
+      </span>
+      <span class="logoutButton" fxFlexOffset="10px" title="Logout">
+        <button  color="warn" (click)="logout()" ><fa-icon icon="sign-out-alt"></fa-icon></button>
       </span>
     </span>
   </span>

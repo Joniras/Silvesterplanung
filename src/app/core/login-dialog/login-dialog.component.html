@@ -78,7 +78,7 @@
               <mat-error [hidden]="visibleNameControl.errors && visibleNameControl.errors.required" >
                 Gib einen Namen an
               </mat-error>
-              <mat-error [hidden]="visibleNameControl.errors && visibleNameControl.errors.minlength" >
+              <mat-error [hidden]="visibleNameControl.errors && visibleNameControl.errors.minlength && !visibleNameControl.errors.required" >
                 Gib einen längeren Namen an
               </mat-error>
             </mat-form-field>

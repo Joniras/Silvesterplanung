@@ -1,10 +1,13 @@
 import {NgModule} from '@angular/core';
 import {
   MAT_DATE_LOCALE,
-  MatButtonModule, MatButtonToggleModule,
+  MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatDialogModule,
-  MatInputModule, MatListModule,
+  MatInputModule,
+  MatListModule,
+  MatSidenavModule,
   MatSlideToggleModule,
   MatTabsModule
 } from '@angular/material';
@@ -19,7 +22,9 @@ import {CommonModule} from '@angular/common';
     MatTabsModule,
     MatSlideToggleModule,
     MatListModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSidenavModule,
+    MatCardModule
 
   ],
   exports: [
@@ -30,7 +35,9 @@ import {CommonModule} from '@angular/common';
     MatTabsModule,
     MatSlideToggleModule,
     MatListModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSidenavModule,
+    MatCardModule
     ],
   declarations: [
   ],

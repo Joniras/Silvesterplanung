@@ -1,0 +1,29 @@
+@import "../../../sass/variables";
+#wishes{
+  //background-color: #3B5998;
+}
+
+.noWishes{
+  mat-card{
+    background-color: $accent;
+  }
+}
+
+.addForm{
+  background-color: white;
+  padding: 5px 15px 5px 15px;
+}
+
+.addFormContainer{
+  position: relative;
+  .notLoggedInOverlay{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #ffffffc9;
+    z-index: 1000;
+    border-radius: 5px;
+  }
+}

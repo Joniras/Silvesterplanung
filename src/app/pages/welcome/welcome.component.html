@@ -1,12 +1,30 @@
-<div class="welcomeContainer" fxLayout="column" fxLayoutAlign="center center">
-
-  <div fxLayoutAlign="start stretch" fxLayout="column" class="welcomeMessage">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <span>Hier findest du alle Infos zur</span>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <span>letzten Party des Jahres</span>
+<div class="welcomeContainer" fxLayout="column" fxLayoutAlign="start center" >
+  <div fxLayout="column" fxLayoutAlign="center center" fxFlex="auto">
+    <div fxLayoutAlign="start stretch" fxLayout="column" class="welcomeMessage" ngClass.gt-sm="fixedWidth" >
+      <div fxLayout="row" fxLayoutAlign="start center" >
+        <span>Hier findest du alle Infos zur</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign.gt-sm="end center" fxLayoutAlign="start center">
+        <span>letzten Party des Jahres</span>
+      </div>
     </div>
   </div>
-
+  <div class="citeContainer" fxLayout="row" fxLayoutAlign="center center">
+    <div class="cite" fxLayout="column" fxLayoutAlign="start stretch">
+      <div class="citeText" fxLayout="row" fxLayoutAlign="center start">
+        <span>
+          <span class="quotemark">&bdquo;</span> {{cite?.text}} <span class="quotemark">&ldquo;</span>
+        </span>
+      </div>
+      <cite class="citeAuthor" fxLayout="row" fxLayoutAlign="end start" fxFlexOffset="7px">
+        <cite>
+          {{cite?.author}}
+        </cite>
+      </cite>
+    </div>
+  </div>
 </div>
+
+
+
+

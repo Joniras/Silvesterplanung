@@ -14,6 +14,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SameValueDirective} from '../other/sameValueAsDirective';
+import {PricesComponent} from '../pages/prices/prices.component';
+import {FeatureInProgressComponent} from './feature-in-progress/feature-in-progress.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import {SameValueDirective} from '../other/sameValueAsDirective';
     LoginDialogComponent,
     SameValueDirective,
     HeaderComponent,
+    PricesComponent,
+    FeatureInProgressComponent
   ],
   exports: [
       HeaderComponent

@@ -16,16 +16,18 @@ import {NotificationService} from './services/notification.service';
 import {LoginDialogComponent} from './core/login-dialog/login-dialog.component';
 import {CoreModule} from './core/core.module';
 import './other/fontAwesomeIncludes';
+import {MaterialImportModule} from './import-modules/material-import.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     CoreModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    MaterialImportModule,
     FlexLayoutModule,
     SimpleNotificationsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),

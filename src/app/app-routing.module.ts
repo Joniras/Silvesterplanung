@@ -6,6 +6,7 @@ import {BookingComponent} from './pages/booking/booking.component';
 import {GalleryComponent} from './pages/gallery/gallery.component';
 import {ContactComponent} from './pages/contact/contact.component';
 import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.component';
+import {PricesComponent} from './pages/prices/prices.component';
 
 export const appRoutes: Routes = [
   {path: '', children: [
@@ -14,6 +15,7 @@ export const appRoutes: Routes = [
       {path: 'book', component: BookingComponent},
       {path: 'gallery', component: GalleryComponent},
       {path: 'contact', component: ContactComponent},
+      {path: 'prices', component: PricesComponent},
     ]},
   {path: "**", component: PageNotFoundComponent}
 ];

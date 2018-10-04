@@ -4,3 +4,19 @@
     margin-bottom: 50px;
   }
 }
+
+#sideNav{
+  background-color: black;
+  .menu{
+    font-size: 30px;
+    .menuItem{
+      text-align: center;
+      font-family: Monthoers, Buxton, sans-serif;
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+      padding: 10px 20px 10px 10px;
+      border-top: 1px solid #292929;
+    }
+  }
+}
