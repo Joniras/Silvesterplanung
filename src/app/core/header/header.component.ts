@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {LoginDialogComponent} from '../login-dialog/login-dialog.component';
 import {AuthService} from '../../services/auth.service';
-import {UserProfile} from '../interfaces';
+import {UserProfile} from '../../other/interfaces';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authenticator: AuthService, private dialog: MatDialog) {
     this.authenticator.getUserObservable().subscribe(v => {
-      console.log("user:",v);
       this.user = v;
       this.checkingIfAlreadyLoggedIn = false;
     });

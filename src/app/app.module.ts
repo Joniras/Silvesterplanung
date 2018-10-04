@@ -15,7 +15,7 @@ import {AuthService} from './services/auth.service';
 import {NotificationService} from './services/notification.service';
 import {LoginDialogComponent} from './core/login-dialog/login-dialog.component';
 import {CoreModule} from './core/core.module';
-import './core/fontAwesomeIncludes';
+import './other/fontAwesomeIncludes';
 
 @NgModule({
   declarations: [

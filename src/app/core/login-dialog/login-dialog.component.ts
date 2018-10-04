@@ -152,6 +152,8 @@ export class LoginDialogComponent implements OnInit {
         this.closeDialog();
       }, e => {
         console.log('Didnt work: ', e);
+      }).catch(e => {
+        console.log("Error: ",e);
       });
     }
   }
