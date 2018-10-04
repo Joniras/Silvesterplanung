@@ -1,5 +1,9 @@
-<div fxLayout="column" fxLayoutAlign="start stretch">
+<div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100%">
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <div fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="30px" fxFlex="auto" class="outerContainer">
+    <div fxFlex="80" fxFlexOffset="10" class="innerContainer">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
 <simple-notifications></simple-notifications>

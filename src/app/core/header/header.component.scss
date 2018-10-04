@@ -1,0 +1,22 @@
+.header{
+  padding-left: 8px;
+  padding-right: 8px;
+  .Title{
+    padding-top: 10px;
+    font-size: 60px;
+    font-family: Monthoers, sans-serif;
+    color: white;
+    text-decoration: none;
+  }
+
+  .menu{
+    font-size: 20px;
+    .menuItem{
+      margin-right: 15px;
+      font-family: Monthoers, sans-serif;
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}

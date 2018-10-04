@@ -1,18 +1,22 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <span>Silvester 2018/19</span>
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+  <a class="Title" [routerLink]="['/']">SILVeSTEr 18/19</a>
   <span>
-      <a [routerLink]="['/book']">Buchen</a>
-      <a [routerLink]="['/gallery']">Gallerie</a>
-      <a [routerLink]="['/contact']">Anfahrt</a>
-      <a [routerLink]="['/wishes']">Getränkewünsche</a>
-      <button mat-raised-button="" color="primary" (click)="login()" *ngIf="!user">
-        <span *ngIf="!checkingIfAlreadyLoggedIn">Login</span>
-        <fa-icon icon="sync" [spin]="true" *ngIf="checkingIfAlreadyLoggedIn"></fa-icon>
-      </button>
+    <span class="menu">
+        <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
+        <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
+        <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
+        <a [routerLink]="['/wishes']" class="menuItem"><span>Getränkewünsche</span></a>
+        <a (click)="login()" *ngIf="!user" class="menuItem">
+          <span *ngIf="!checkingIfAlreadyLoggedIn">login</span>
+          <fa-icon icon="sync" [spin]="true" *ngIf="checkingIfAlreadyLoggedIn"></fa-icon>
+        </a>
+      </span>
+    <span class="Login">
       <button mat-raised-button="" color="warn" (click)="logout()" *ngIf="user">Logout</button>
       <span class="User" *ngIf="user">
         <span>{{user?.displayName}}</span>
         <img [src]="user?.photoUrl" />
       </span>
     </span>
+  </span>
 </div>
