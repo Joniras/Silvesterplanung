@@ -8,8 +8,10 @@ import {
   MatInputModule,
   MatListModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatTableModule,
   MatTabsModule
 } from '@angular/material';
 import {CommonModule} from '@angular/common';
@@ -26,7 +28,9 @@ import {CommonModule} from '@angular/common';
     MatButtonToggleModule,
     MatSidenavModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSelectModule
   ],
   exports: [
     MatInputModule,
@@ -39,7 +43,9 @@ import {CommonModule} from '@angular/common';
     MatButtonToggleModule,
     MatSidenavModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSelectModule
     ],
   declarations: [
   ],

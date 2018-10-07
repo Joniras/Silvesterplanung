@@ -8,7 +8,12 @@
   <div fxLayout="column" fxLayoutAlign="start stretch" [@fadeIn]="loading?'yes':'no'">
     <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
       <div class="wishesTitle">GetrÄnkewÜnsche</div>
-      <div fxLayout="column" fxLayoutAlign="start stretch">
+      <div  fxFlexOffset="10px" fxLayout="row" fxLayoutAlign="start start">
+        <mat-card class="wishInfo">
+          <fa-icon icon="info-circle"></fa-icon>&nbsp;&nbsp;&nbsp;Hier natürlich nur Sachen dazuspeichern, von denen ihr annehmt, dass ich sie nicht sowieso habe/kaufe.
+        </mat-card>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px">
         <div class="wish" *ngFor="let wish of wishes|async; index as i" fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="5px" >
         <span class="votes" fxFlexOffset="10px" fxLayout="row" fxLayoutAlign="start center" (click)="like(wish)">
           <span class="heart" [tooltip]="(wish.votes | async)?.voterNames" tooltipPlacement="bottom">
@@ -34,28 +39,25 @@
         </div>
       </div>
     </div>
-    <div class="noWishes" *ngIf="(wishes|async)?.length == 0 && !loading" fxLayout="row" fxLayoutAlign="center start">
+    <div class="noWishes" *ngIf="(wishes|async)?.length == 0 && !loading" fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
       <mat-card>Es wurden bisher keine Wünsche angegeben, sei der erste!</mat-card>
     </div>
     <div fxLayout="column" fxLayoutAlign="start center" class="addFormContainer" fxLayoutAlign.gt-sm="start start" >
-      <mat-card class="addForm" fxFlexOffset="30px">
+      <div class="addForm" fxFlexOffset="20px">
       <span class="notLoggedInOverlay" fxLayout="column" fxLayoutAlign="center center" *ngIf="!(user|async)">
         <span><fa-icon icon="lock"></fa-icon> Login erforderlich</span>
       </span>
-        <form fxLayout="row" fxLayoutAlign="center center" #addForm="ngForm" (ngSubmit)="submit(addForm,name.value)">
-          <mat-form-field>
+        <form fxLayout="row" fxLayoutAlign="center center" #addForm="ngForm" (ngSubmit)="submit(addForm,name.value)" class="addForm">
+          <mat-form-field class="addInput">
             <input type="text" matInput="" placeholder="Wunsch" #name required minlength="3">
             <mat-error *ngIf="name.errors">
               Gib einen gültigen Namen ein (min. 3 Buchstaben)
             </mat-error>
           </mat-form-field>
-          <button type="submit" mat-raised-button="" fxFlexOffset="10px" class="AddButton">Speichern</button>
+          <button type="submit" mat-raised-button="" fxFlexOffset="10px" class="AddButton">Hinzufügen</button>
         </form>
-      </mat-card>
+      </div>
     </div>
   </div>
-
-
-
 </div>
 

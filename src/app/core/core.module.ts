@@ -18,6 +18,7 @@ import {PricesComponent} from '../pages/prices/prices.component';
 import {FeatureInProgressComponent} from './feature-in-progress/feature-in-progress.component';
 import {TooltipModule} from 'ngx-tooltip';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AdminViewComponent} from '../pages/admin-view/admin-view.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SameValueDirective,
     HeaderComponent,
     PricesComponent,
-    FeatureInProgressComponent
+    FeatureInProgressComponent,
+    AdminViewComponent,
   ],
   exports: [
       HeaderComponent

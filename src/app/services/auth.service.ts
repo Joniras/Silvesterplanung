@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {auth} from 'firebase';
 import {BehaviorSubject} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {take} from 'rxjs/operators';
+import {skipWhile, take} from 'rxjs/operators';
 import {NotificationService} from './notification.service';
 import {NotificationType} from 'angular2-notifications';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {UserProfile} from '../other/interfaces';
+import {MessagingService} from './messaging.service';
 import Persistence = auth.Auth.Persistence;
 
 @Injectable({
@@ -17,14 +18,19 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<UserProfile>(null);
   private pending: auth.UserCredential = null;
 
-  constructor(private afAuth: AngularFireAuth, private notification: NotificationService, private db: AngularFirestore) {
+  constructor(private afAuth: AngularFireAuth, private notification: NotificationService, private db: AngularFirestore, private msgService: MessagingService) {
     // wenn man noch eingeloggt ist (cookies)
     this.checkIfValidUser();
 
     this.afAuth.auth.setPersistence(Persistence.LOCAL).then(v => {
-      console.log("Persistence set successfully");
+      //console.log("Persistence set successfully");
     }, e => {
       console.log("Persistence set failed");
+    });
+
+    this.msgService.receiveMessage();
+    this.msgService.currentMessage.pipe(skipWhile(v => v == null)).subscribe(v => {
+      this.notification.showGCMNotification(v.notification);
     });
   }
 
@@ -46,7 +52,7 @@ export class AuthService {
       this.checkUID(this.pending.user.uid);
     } else {
       this.afAuth.authState.pipe(take(1)).subscribe(user => {
-        console.log("Current UserState: ", user);
+        //console.log("Current UserState: ", user);
         if (user) {
           this.checkUID(user.uid);
         }else{
@@ -61,7 +67,10 @@ export class AuthService {
       if (profile) {
         this.pending = null;
         // console.log('Found User: ', profile);
+
         this.loggedIn.next(profile);
+        this.msgService.getPermission();
+
       }
     });
   }
@@ -88,7 +97,6 @@ export class AuthService {
       }, reject);
     });
   }
-
 
   registerWithEmail(email: string, password: string) {
     return new Promise((resolve, reject) => {

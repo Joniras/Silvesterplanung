@@ -10,6 +10,11 @@
   .menu{
     font-size: 30px;
     .menuItem{
+      &.adminButton{
+        background-color: #1a0023;
+        padding: 10px;
+        border-radius: 3px;
+      }
       text-align: center;
       font-family: Monthoers, Buxton, sans-serif;
       text-decoration: none;

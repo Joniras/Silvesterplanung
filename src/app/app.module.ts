@@ -1,12 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {AngularFireStorageModule} from '@angular/fire/storage';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -19,6 +18,14 @@ import './other/fontAwesomeIncludes';
 import {MaterialImportModule} from './import-modules/material-import.module';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import localeDE from '@angular/common/locales/de-AT';
+import {registerLocaleData} from '@angular/common';
+import {AdminGuard} from './other/AdminGuard';
+import {MessagingService} from './services/messaging.service';
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeDE);
 
 @NgModule({
   declarations: [
@@ -36,13 +43,14 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthService, NotificationService],
+  providers: [AdminGuard, AuthService, MessagingService, NotificationService,{
+    provide: LOCALE_ID,
+    useValue: 'de-AT'
+  }],
   bootstrap: [AppComponent],
   entryComponents: [LoginDialogComponent]
 })
 export class AppModule {
 }
-

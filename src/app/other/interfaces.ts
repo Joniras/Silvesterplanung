@@ -5,5 +5,6 @@ export interface UserProfile {
     uid: string;
     ref: DocumentReference;
     photoUrl: string;
+    admin: boolean;
 }
 

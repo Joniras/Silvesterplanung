@@ -10,8 +10,9 @@
 }
 
 .addForm{
-  background-color: white;
-  padding: 5px 15px 5px 15px;
+  //background-color: white;
+  padding: 5px 15px 5px 5px;
+  position: relative;
 }
 
 .addFormContainer{
@@ -26,6 +27,7 @@
     background-color: rgba(255, 255, 255, 0.71);
     z-index: 1000;
     border-radius: 5px;
+    color: black;
   }
 }
 
@@ -73,6 +75,7 @@
           }
         }
         .voteCount{
+          user-select: none;
           position: absolute;
           padding-bottom: 2px;
           width: 100%;
@@ -89,4 +92,15 @@
 
 .AddButton{
   z-index: 100;
+}
+
+.wishInfo{
+  fa-icon{
+    font-size: 20px;
+  }
+  background-color: #9cceff;;
+  color: #2b2b2b;
+  border: 1px solid #000000;
+  padding: 11px;
+  border-radius: 4px;
 }

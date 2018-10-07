@@ -7,6 +7,8 @@ import {GalleryComponent} from './pages/gallery/gallery.component';
 import {ContactComponent} from './pages/contact/contact.component';
 import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.component';
 import {PricesComponent} from './pages/prices/prices.component';
+import {AdminGuard} from './other/AdminGuard';
+import {AdminViewComponent} from './pages/admin-view/admin-view.component';
 
 export const appRoutes: Routes = [
   {path: '', children: [
@@ -16,6 +18,7 @@ export const appRoutes: Routes = [
       {path: 'gallery', component: GalleryComponent},
       {path: 'contact', component: ContactComponent},
       {path: 'prices', component: PricesComponent},
+      {path: 'admin', component: AdminViewComponent, canActivate: [AdminGuard]},
     ]},
   {path: "**", component: PageNotFoundComponent}
 ];

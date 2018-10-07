@@ -17,6 +17,11 @@
       text-decoration: none;
       color: white;
       cursor: pointer;
+      &.adminButton{
+        background-color: #1a0023;
+        padding: 10px;
+        border-radius: 3px;
+      }
       &.active{
         text-decoration: underline;
       }

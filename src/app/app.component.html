@@ -18,11 +18,12 @@
       </div>
     </div>
     <span class="menu" fxLayout="column">
+        <a [routerLink]="['/prices']" class="menuItem"><span>Preise</span></a>
         <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
+        <a [routerLink]="['/wishes']" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
         <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
         <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
-        <a [routerLink]="['/wishes']" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
-        <a [routerLink]="['/prices']" class="menuItem"><span>Preise</span></a>
+        <a [routerLink]="['/admin']" routerLinkActive="active" class="menuItem adminButton" *ngIf="(user|async)?.admin"><span>Admin</span></a>
         <a (click)="login()" *ngIf="!(user|async)" class="menuItem">
           <span >login</span>
         </a>
@@ -32,7 +33,7 @@
     <div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100vh">
       <app-header (toggleNav)="sidenav.toggle()"></app-header>
       <div fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="30px" fxFlex="auto" class="outerContainer">
-        <div fxFlex="80" fxFlexOffset="10" class="innerContainer" >
+        <div fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" fxFlex="94" fxFlexOffset="3" class="innerContainer" >
           <router-outlet></router-outlet>
         </div>
       </div>

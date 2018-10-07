@@ -2,6 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {LoginDialogComponent} from './core/login-dialog/login-dialog.component';
 import {MatDialog} from '@angular/material';
+import {NotificationService} from './services/notification.service';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {SwUpdate} from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +17,14 @@ export class AppComponent implements OnInit {
 
   public user = null;
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private notification: NotificationService, private db: AngularFireDatabase, updates: SwUpdate) {
     this.user = authService.getUserObservable();
+    updates.available.subscribe(event => {
+      updates.activateUpdate().then(() => document.location.reload());
+    });
   }
 
-  login(){
+  login() {
     this.sidenav.toggle();
     this.dialog.open(LoginDialogComponent, {
       disableClose: false
@@ -26,11 +32,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
-
-
 }
+
+
