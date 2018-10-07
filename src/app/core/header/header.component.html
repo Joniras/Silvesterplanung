@@ -3,11 +3,11 @@
   <button (click)="openNav()" fxHide.gt-sm class="menuButton"><fa-icon icon="bars"></fa-icon></button>
   <span fxHide.sm fxHide.lt-sm="true" fxLayout="row" fxLayoutAlign="start center">
     <span class="menu">
-      <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
-      <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
-      <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
-      <a [routerLink]="['/wishes']" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
-      <a [routerLink]="['/prices']" class="menuItem"><span>Preise</span></a>
+      <a [routerLink]="['/book']" routerLinkActive="active" class="menuItem"><span>Buchen</span></a>
+      <a [routerLink]="['/gallery']" routerLinkActive="active" class="menuItem"><span>Gallerie</span></a>
+      <a [routerLink]="['/contact']" routerLinkActive="active" class="menuItem"><span>anfahrt</span></a>
+      <a [routerLink]="['/wishes']" routerLinkActive="active" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
+      <a [routerLink]="['/prices']" routerLinkActive="active" class="menuItem"><span>Preise</span></a>
       <a (click)="login()" *ngIf="!user" class="menuItem">
         <span *ngIf="!checkingIfAlreadyLoggedIn">login</span>
         <fa-icon icon="sync" [spin]="true" *ngIf="checkingIfAlreadyLoggedIn"></fa-icon>

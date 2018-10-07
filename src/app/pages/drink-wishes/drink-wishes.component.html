@@ -1,40 +1,60 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100%" id="wishes">
-  <div fxFlexOffset="20px" *ngIf="(wishes|async)">
-    <div class="wish" *ngFor="let wish of (wishes|async)" fxLayout="row" fxLayoutAlign="start stretch">
-      <span class="creator" fxFlex="30px">
-        <span class="creatorImg">
-          <img [src]="(wish.data.creator|async)?.photoUrl">
+<div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%" id="wishes">
+  <div class="loading" [@loading]="loading?'yes':'no'" fxLayout="row" fxLayoutAlign="center start">
+    <mat-card><div fxLayout="column" fxLayoutAlign="start center">
+      <div >Wünsche werden geladen</div>
+      <mat-spinner fxFlexOffset="20px"></mat-spinner>
+    </div></mat-card>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start stretch" [@fadeIn]="loading?'yes':'no'">
+    <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
+      <div class="wishesTitle">GetrÄnkewÜnsche</div>
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div class="wish" *ngFor="let wish of wishes|async; index as i" fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="5px" >
+        <span class="votes" fxFlexOffset="10px" fxLayout="row" fxLayoutAlign="start center" (click)="like(wish)">
+          <span class="heart" [tooltip]="(wish.votes | async)?.voterNames" tooltipPlacement="bottom">
+            <fa-icon icon="heart" [ngClass]="{'voted': (wish.votes|async)?.vote}" [@voted]="(wish.votes|async)?.vote? 'yes':'no'"></fa-icon>
+            <span class="voteCount" fxLayout="row" fxLayoutAlign="center center">
+              <span >{{(wish.votes | async)?.voteCount}}</span>
+            </span>
+          </span>
         </span>
-      </span>
-      <span class="name">
-        <span>
-          {{wish.data.name}}
+          <span class="creator" fxFlex="30px" fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="20px" >
+          <span class="creatorImg" fxLayout="row" fxLayoutAlign="start center">
+            <img [src]="wish.creator.photoUrl">
+          </span>
         </span>
-      </span>
-      <span class="votes">
-        <span class="heart">
-          <fa-icon icon="heart" (click)="like(wish)"></fa-icon>
-          <span class="voteCount">{{(wish.data.votes | async)?.length}}</span>
+          <span class="colon" fxLayoutAlign="start center" fxFlexOffset="10px">
+          <span>:</span>
         </span>
-      </span>
+          <span class="name" fxFlexOffset="10px" fxLayout="row" fxLayoutAlign="start center">
+          <span>
+            {{wish.name}}
+          </span>
+        </span>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="noWishes" *ngIf="!(wishes|async)?.length" fxLayout="row" fxLayoutAlign="center start">
-    <mat-card>Es wurden bisher keine Wünsche angegeben, sei der erste!</mat-card>
-  </div>
-  <div fxLayout="column" fxLayoutAlign="center center" class="addFormContainer">
-    <mat-card class="addForm" fxFlexOffset="20px">
+    <div class="noWishes" *ngIf="(wishes|async)?.length == 0 && !loading" fxLayout="row" fxLayoutAlign="center start">
+      <mat-card>Es wurden bisher keine Wünsche angegeben, sei der erste!</mat-card>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start center" class="addFormContainer" fxLayoutAlign.gt-sm="start start" >
+      <mat-card class="addForm" fxFlexOffset="30px">
       <span class="notLoggedInOverlay" fxLayout="column" fxLayoutAlign="center center" *ngIf="!(user|async)">
         <span><fa-icon icon="lock"></fa-icon> Login erforderlich</span>
       </span>
-      <form fxLayout="row" fxLayoutAlign="center center">
-        <mat-form-field>
-          <input type="text" matInput="" placeholder="Wunsch" #name>
-        </mat-form-field>
-        <button type="submit" (click)="addWish(name.value)" mat-raised-button="" fxFlexOffset="10px">Speichern</button>
-      </form>
-    </mat-card>
+        <form fxLayout="row" fxLayoutAlign="center center" #addForm="ngForm" (ngSubmit)="submit(addForm,name.value)">
+          <mat-form-field>
+            <input type="text" matInput="" placeholder="Wunsch" #name required minlength="3">
+            <mat-error *ngIf="name.errors">
+              Gib einen gültigen Namen ein (min. 3 Buchstaben)
+            </mat-error>
+          </mat-form-field>
+          <button type="submit" mat-raised-button="" fxFlexOffset="10px" class="AddButton">Speichern</button>
+        </form>
+      </mat-card>
+    </div>
   </div>
+
 
 
 </div>

@@ -16,7 +16,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {SameValueDirective} from '../other/sameValueAsDirective';
 import {PricesComponent} from '../pages/prices/prices.component';
 import {FeatureInProgressComponent} from './feature-in-progress/feature-in-progress.component';
-
+import {TooltipModule} from 'ngx-tooltip';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -25,7 +26,9 @@ import {FeatureInProgressComponent} from './feature-in-progress/feature-in-progr
     MaterialImportModule,
     FontAwesomeModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    TooltipModule,
+    NgbModule
   ],
   declarations: [
     PageNotFoundComponent,

@@ -16,14 +16,77 @@
 
 .addFormContainer{
   position: relative;
+  margin-bottom: 20px;
   .notLoggedInOverlay{
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #ffffffc9;
+    background-color: rgba(255, 255, 255, 0.71);
     z-index: 1000;
     border-radius: 5px;
   }
+}
+
+.wishesTitle{
+  font-family: Monthoers,Buxton, sans-serif;
+  font-size: 31px;
+}
+
+.wish{
+  min-height: 35px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  .creator{
+    .creatorImg{
+      img{
+        max-height: 30px;
+        max-width: 30px;
+        border-radius: 15px;
+        border: 1px solid white
+      }
+    }
+  }
+  .colon{
+    font-size: 30px;
+    padding-bottom: 5px;
+  }
+  .name{
+    span{
+      font-family: Roboto, sans-serif;
+    }
+  }
+  .votes{
+    cursor: pointer;
+      .heart{
+        position: relative;
+        fa-icon{
+          &.voted{
+            color: #da2002;
+          }
+          font-size: 25px;
+          svg{
+            margin-top:4px;
+
+          }
+        }
+        .voteCount{
+          position: absolute;
+          padding-bottom: 2px;
+          width: 100%;
+          height: 100%;
+          color: black;
+          left: 0;
+          top: 0;
+          font-size:13px;
+          font-family: Roboto, sans-serif;
+        }
+    }
+  }
+}
+
+.AddButton{
+  z-index: 100;
 }

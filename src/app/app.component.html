@@ -1,22 +1,32 @@
 <mat-sidenav-container>
   <mat-sidenav [mode]="'over'" #sidenav id="sideNav" (click)="sidenav.close()">
+    <div class="User" *ngIf="(user|async)" fxLayout="column" fxLayoutAlign="start stretch">
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <span fxLayout="row" fxLayoutAlign="start center" style="overflow: hidden">
+        <span class="image" >
+          <img [src]="(user|async)?.photoUrl" />
+        </span>
+        <span class="name" fxFlexOffset="5px" fxLayoutAlign="start center">
+          <span>{{(user|async)?.displayName}}</span>
+        </span>
+      </span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlexOffset="10px">
+        <div class="logoutButton" title="Logout" fxFlex="100">
+          <button color="warn" (click)="logout()" fxFlex="100"><fa-icon icon="sign-out-alt"></fa-icon></button>
+        </div>
+      </div>
+    </div>
     <span class="menu" fxLayout="column">
         <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
         <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
         <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
         <a [routerLink]="['/wishes']" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
         <a [routerLink]="['/prices']" class="menuItem"><span>Preise</span></a>
-        <a (click)="login()" *ngIf="!user" class="menuItem">
+        <a (click)="login()" *ngIf="!(user|async)" class="menuItem">
           <span >login</span>
         </a>
       </span>
-    <span class="Login">
-      <button mat-raised-button="" color="warn" (click)="logout()" *ngIf="user">Logout</button>
-      <span class="User" *ngIf="user">
-        <span>{{user?.displayName}}</span>
-        <img [src]="user?.photoUrl" />
-      </span>
-    </span>
   </mat-sidenav>
   <mat-sidenav-content>
     <div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100vh">

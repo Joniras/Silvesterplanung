@@ -17,6 +17,8 @@ import {LoginDialogComponent} from './core/login-dialog/login-dialog.component';
 import {CoreModule} from './core/core.module';
 import './other/fontAwesomeIncludes';
 import {MaterialImportModule} from './import-modules/material-import.module';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import {MaterialImportModule} from './import-modules/material-import.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialImportModule,
+    FontAwesomeModule,
     FlexLayoutModule,
     SimpleNotificationsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule // imports firebase/storage only needed for storage features
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    AngularFireDatabaseModule
   ],
   providers: [AuthService, NotificationService],
   bootstrap: [AppComponent],

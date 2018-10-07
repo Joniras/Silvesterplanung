@@ -12,8 +12,10 @@ export class AppComponent implements OnInit {
   @ViewChild('sidenav')
   public sidenav = null;
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {
+  public user = null;
 
+  constructor(private authService: AuthService, private dialog: MatDialog) {
+    this.user = authService.getUserObservable();
   }
 
   login(){
@@ -24,6 +26,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 

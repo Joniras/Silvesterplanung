@@ -20,3 +20,38 @@
     }
   }
 }
+
+
+.User{
+  padding: 5px 5px 1px 5px;
+  height: 100px;
+  .name{
+    span{
+      font-size: 20px;
+      margin-bottom:4px;
+    }
+  }
+
+  .image{
+    img{
+      max-height: 40px;
+      max-width: 40px;
+      border-radius: 20px;
+      border: 1px solid white;
+    }
+  }
+
+  .logoutButton{
+    margin-top: 1px;
+    button{
+      cursor: pointer;
+      background-color: #ff2424;
+      border: 1px solid black;
+      height: 35px;
+      border-radius: 7px;
+      &:hover{
+        background-color: #c32121;
+      }
+    }
+  }
+}

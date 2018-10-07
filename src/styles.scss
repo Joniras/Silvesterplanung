@@ -69,6 +69,19 @@ mat-sidenav-container, mat-sidenav-content{
   color: white;
 }
 
+.simple-notification-wrapper{
+  z-index: 10000;
+}
 
 
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: white;
+}
+
+.tooltip-inner{
+  background-color: white;
+  color: black;
+  white-space: pre-wrap;
+}
 

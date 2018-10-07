@@ -7,7 +7,7 @@
           <br>
           <form (ngSubmit)="doLogin(loginForm)" #loginForm="ngForm">
             <mat-form-field class="fullWidth">
-              <input type="email" email autofocus matInput autocomplete="email" required ngModel #emailControl="ngModel" name="email" placeholder="Email">
+              <input type="email" email autofocus matInput autocomplete="email" ngModel #emailControl="ngModel" name="email" placeholder="Email">
               <mat-error [hidden]="emailControl.valid || emailControl.pristine" >
                 Gib deine Email an
               </mat-error>
