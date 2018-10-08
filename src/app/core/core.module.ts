@@ -19,6 +19,7 @@ import {FeatureInProgressComponent} from './feature-in-progress/feature-in-progr
 import {TooltipModule} from 'ngx-tooltip';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminViewComponent} from '../pages/admin-view/admin-view.component';
+import {NgxImageGalleryModule} from 'ngx-image-gallery';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import {AdminViewComponent} from '../pages/admin-view/admin-view.component';
     FormsModule,
     FlexLayoutModule,
     TooltipModule,
-    NgbModule
+    NgbModule,
+    NgxImageGalleryModule,
   ],
   declarations: [
     PageNotFoundComponent,
