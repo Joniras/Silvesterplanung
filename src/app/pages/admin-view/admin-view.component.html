@@ -1,0 +1,35 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%" id="wishes">
+  <div fxLayout="column" fxLayoutAlign="start stretch" >
+    <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
+      <div class="title">GetrÄnkewÜnsche managen</div>
+    </div>
+    <span *ngFor="let wish of (wishes|async)">
+      <button (click)="deleteWish(wish)" mat-mini-fab="" color="warn">X</button>
+      {{wish.name}} von "{{wish.creator.originalDisplayName}}"
+    </span>
+  </div>
+  <mat-card >
+    <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
+      <div class="title">Notification manager</div>
+      <form fxLayout="column" fxLayoutAlign="start start" (ngSubmit)="addNotificationWithForm(addForm)" #addForm="ngForm">
+          <mat-form-field>
+            <mat-select placeholder="Wähle ein oder mehrere Empfänger aus" [multiple]="true" ngModel="" name="users">
+              <mat-option *ngFor="let user of users|async" [value]="user.uid">
+                {{user.originalDisplayName}} ({{user.email}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput="" required minlength="3" placeholder="Titel" name="title" ngModel="">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput="" required placeholder="Inhalt" name="body" ngModel="">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput="" placeholder="Url eines Bildes" name="img" ngModel="">
+        </mat-form-field>
+          <button mat-raised-button="" type="submit" color="primary">Senden</button>
+        </form>
+    </div>
+  </mat-card>
+</div>
