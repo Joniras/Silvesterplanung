@@ -147,3 +147,43 @@ app-drink-wishes{
     }
   }
 }
+
+.zusageStatus {
+  .zusageIcon {
+    .StatusNull {
+      color: #ffffff;
+    }
+    .Status0 {
+      color: #ff5d38;
+    }
+    .Status25 {
+      color: #ffb65b;
+    }
+    .Status50 {
+      color: grey;
+    }
+    .Status75 {
+      color: #d9ed00;
+    }
+    .Status100 {
+      color: #4cc208;
+    }
+  }
+}
+
+.zusageMenu {
+  .mat-menu-content {
+    padding: 0 !important;
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(top, rgb(255, 255, 255) 18%, rgb(255, 150, 105) 22%, rgb(255, 222, 103) 49%, rgb(228, 255, 95) 76%, rgb(153, 255, 137) 100%);
+    background: -webkit-linear-gradient(top, rgb(255, 255, 255) 18%, rgb(255, 150, 105) 22%, rgb(255, 222, 103) 49%, rgb(228, 255, 95) 76%, rgb(153, 255, 137) 100%);
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 18%, rgb(255, 150, 105) 22%, rgb(255, 222, 103) 49%, rgb(228, 255, 95) 76%, rgb(153, 255, 137) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#99ff89', GradientType=0);
+  }
+  .zusage {
+    fa-icon {
+      margin-right: 10px;
+
+    }
+  }
+}

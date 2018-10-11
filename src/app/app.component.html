@@ -1,6 +1,6 @@
-<mat-sidenav-container>
-  <mat-sidenav [mode]="'over'" #sidenav id="sideNav" (click)="sidenav.close()">
-    <div class="User" *ngIf="(user|async)" fxLayout="column" fxLayoutAlign="start stretch">
+<mat-sidenav-container (swipeleft)="sidenav.close()">
+  <mat-sidenav [mode]="'over'" #sidenav id="sideNav">
+    <div class="User" *ngIf="(user|async)" fxLayout="column" fxLayoutAlign="start stretch" (click)="sidenav.close()">
       <div fxLayout="row" fxLayoutAlign="start start">
         <span fxLayout="row" fxLayoutAlign="start center" style="overflow: hidden">
         <span class="image" >
@@ -18,18 +18,77 @@
       </div>
     </div>
     <span class="menu" fxLayout="column">
-        <a [routerLink]="['/prices']" class="menuItem"><span>Preise</span></a>
-        <a [routerLink]="['/book']" class="menuItem"><span>Buchen</span></a>
-        <a [routerLink]="['/wishes']" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
-        <a [routerLink]="['/gallery']" class="menuItem"><span>Gallerie</span></a>
-        <a [routerLink]="['/contact']" class="menuItem"><span>anfahrt</span></a>
-        <a [routerLink]="['/admin']" routerLinkActive="active" class="menuItem adminButton" *ngIf="(user|async)?.admin"><span>Admin</span></a>
-        <a (click)="login()" *ngIf="!(user|async)" class="menuItem">
+      <span class="menuItem zusageStatus" [matMenuTriggerFor]="zusageStatus" *ngIf="(user|async)">
+        zusage:
+        <span class="zusageIcon">
+          <span [ngSwitch]="(user|async)?.zusage"
+                [ngClass]="'Status'+(!(user|async) || (user|async).zusage==undefined?'Null':(user|async).zusage)">
+            <span *ngSwitchCase="0">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="25">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="50">
+              <fa-icon [icon]="icons[4]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="75">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="100">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+            </span>
+            <span *ngSwitchDefault>
+              <fa-icon [icon]="icons[3]"></fa-icon>
+            </span>
+          </span>
+        </span>
+        <mat-menu #zusageStatus="matMenu" class="zusageMenu">
+          <button mat-menu-item (click)="setZusageStatus(50)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[4]"></fa-icon>
+              <span>Weiss noch nicht</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(0)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+              <span>Komme nicht</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(25)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+              <span>Komme ziemlich sicher nicht</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(75)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+              <span>Komme ziemlich sicher</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(100)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+              <span>Komme sicher</span>
+            </span>
+          </button>
+        </mat-menu>
+      </span>
+        <a [routerLink]="['/prices']" class="menuItem" (click)="sidenav.close()"><span>Preise</span></a>
+        <a [routerLink]="['/book']" class="menuItem" (click)="sidenav.close()"><span>Buchen</span></a>
+        <a [routerLink]="['/wishes']" class="menuItem" (click)="sidenav.close()"><span>GetrÄnkewÜnsche</span></a>
+        <a [routerLink]="['/gallery']" class="menuItem" (click)="sidenav.close()"><span>Gallerie</span></a>
+        <a [routerLink]="['/contact']" class="menuItem" (click)="sidenav.close()"><span>anfahrt</span></a>
+        <a [routerLink]="['/admin']" routerLinkActive="active" class="menuItem adminButton" *ngIf="(user|async)?.admin"
+           (click)="sidenav.close()"><span>Admin</span></a>
+        <a (click)="login();sidenav.close()" *ngIf="!(user|async)" class="menuItem">
           <span >login</span>
         </a>
       </span>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content (swipeRight)="sidenav.open()">
     <div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100vh">
       <app-header (toggleNav)="sidenav.toggle()"></app-header>
       <div fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="30px" fxFlex="auto" class="outerContainer">

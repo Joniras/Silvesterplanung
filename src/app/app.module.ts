@@ -22,7 +22,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import localeDE from '@angular/common/locales/de-AT';
 import {registerLocaleData} from '@angular/common';
 import {AdminGuard} from './other/AdminGuard';
-import {MessagingService} from './services/messaging.service';
+import {MessagingService} from "./services/messaging.service";
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeDE);

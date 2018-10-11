@@ -55,7 +55,7 @@ export class AuthService {
         //console.log("Current UserState: ", user);
         if (user) {
           this.checkUID(user.uid);
-        }else{
+        } else {
           this.loggedIn.next(null);
         }
       });
@@ -198,6 +198,17 @@ export class AuthService {
       }, e => {
         reject(e);
       });
+    });
+  }
+
+  setZusageStatus(number: number) {
+    this.db.doc(this.getUser().ref).update({
+      zusage: number,
+      zusageUpdate: new Date()
+    }).then(() => {
+      const user = this.getUser();
+      user.zusage = number;
+      this.loggedIn.next(user);
     });
   }
 }

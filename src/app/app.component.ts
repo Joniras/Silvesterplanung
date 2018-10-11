@@ -5,6 +5,8 @@ import {MatDialog} from '@angular/material';
 import {NotificationService} from './services/notification.service';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {SwUpdate} from '@angular/service-worker';
+import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faCircle, faQuestionCircle, faTimesCircle} from "@fortawesome/free-regular-svg-icons";
 
 @Component({
   selector: 'app-root',
@@ -14,13 +16,16 @@ import {SwUpdate} from '@angular/service-worker';
 export class AppComponent implements OnInit {
   @ViewChild('sidenav')
   public sidenav = null;
-
+  public icons = [faArrowDown, faCheckCircle, faTimesCircle, faQuestionCircle, faCircle];
   public user = null;
 
   constructor(private authService: AuthService, private dialog: MatDialog, private notification: NotificationService, private db: AngularFireDatabase, updates: SwUpdate) {
     this.user = authService.getUserObservable();
     updates.available.subscribe(event => {
-      updates.activateUpdate().then(() => document.location.reload());
+      updates.activateUpdate().then(() => {
+        alert("Eine Neue Version ist verfügbar! Die Seite wird jetzt aktualisiert.");
+        document.location.reload();
+      });
     });
   }
 
@@ -37,6 +42,10 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  setZusageStatus(number: number) {
+    this.authService.setZusageStatus(number);
   }
 }
 

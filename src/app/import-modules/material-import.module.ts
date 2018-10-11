@@ -7,6 +7,7 @@ import {
   MatDialogModule,
   MatInputModule,
   MatListModule,
+  MatMenuModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
@@ -30,7 +31,8 @@ import {CommonModule} from '@angular/common';
     MatCardModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
   ],
   exports: [
     MatInputModule,
@@ -45,7 +47,8 @@ import {CommonModule} from '@angular/common';
     MatCardModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
     ],
   declarations: [
   ],

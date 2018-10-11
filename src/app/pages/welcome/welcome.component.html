@@ -5,20 +5,21 @@
         <span>Hier findest du alle Infos zur</span>
       </div>
       <div fxLayout="row" fxLayoutAlign.gt-sm="end center" fxLayoutAlign="start center">
-        <span>letzten Party des Jahres</span>
+        <span>letzten und ersten Party des Jahres</span>
       </div>
     </div>
   </div>
-  <div class="citeContainer" fxLayout="row" fxLayoutAlign="center center" *ngIf="cite">
+  <div class="citeContainer" fxLayout="row" fxLayoutAlign="center center" *ngIf="cites && index"
+       (click)="refreshCite()">
     <div class="cite" fxLayout="column" fxLayoutAlign="start stretch">
       <div class="citeText" fxLayout="row" fxLayoutAlign="center start">
         <span>
-          <span class="quotemark">&bdquo;</span> {{cite?.text}} <span class="quotemark">&ldquo;</span>
+          <span class="quotemark">&bdquo;</span> {{cites[index]?.text}} <span class="quotemark">&ldquo;</span>
         </span>
       </div>
       <cite class="citeAuthor" fxLayout="row" fxLayoutAlign="end start" fxFlexOffset="7px">
         <cite>
-          {{cite?.author}}
+          {{cites[index]?.author}}
         </cite>
       </cite>
     </div>

@@ -1,7 +1,28 @@
-<div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center" class="header" fxLayout="column" fxLayoutAlign="start stretch">
-  <a class="Title" [routerLink]="['/']">SILVeSTEr 18/19</a>
-  <button (click)="openNav()" fxHide.gt-sm class="menuButton"><fa-icon icon="bars"></fa-icon></button>
-  <span fxHide.sm fxHide.lt-sm="true" fxLayout="row" fxLayoutAlign="start center">
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <div *ngIf="(!user && !checkingIfAlreadyLoggedIn)|| (user && user.zusage==undefined)" class="statusHint"
+       ngClass.gt-xs="bigText" fxLayout="row" fxLayoutAlign.gt-sm="space-between center" fxLayoutAlign="center center"
+       (click)="login()">
+    <span fxFlex="10" fxShow.gt-sm="" fxHide>&nbsp;</span>
+    <span class="hintText" fxFlex="auto" fxLayout="row" fxLayoutAlign="center center">
+      <span *ngIf="!user">
+        Logge dich ein um deinen Zusage-Status zu bearbeiten
+      </span>
+      <span *ngIf="user && user.zusage==undefined">
+        Bitte sag mir Bescheid, ob du kommst !
+      </span>
+    </span>
+    <span class="hintButton" [ngClass]="user&&user.zusage==undefined?'zusageHintButton':null" fxFlex="10" fxLayout="row"
+          fxLayoutAlign="end center" fxShow.gt-sm="" fxHide>
+      <fa-icon [icon]="icons[0]"></fa-icon>
+    </span>
+  </div>
+  <div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center" class="header" fxLayout="column"
+       fxLayoutAlign="start stretch">
+    <span fxLayout="row" fxLayoutAlign="start center">
+    <button (click)="openNav()" fxHide.gt-sm class="menuButton"><fa-icon icon="bars"></fa-icon></button>
+    <a class="Title" [routerLink]="['/']">SILVeSTEr 18/19</a>
+    </span>
+    <span fxHide.sm fxHide.lt-sm="true" fxLayout="row" fxLayoutAlign="start center">
     <span class="menu">
       <a [routerLink]="['/admin']" routerLinkActive="active" class="menuItem adminButton" *ngIf="user?.admin"><span>Admin</span></a>
       <a [routerLink]="['/prices']" routerLinkActive="active" class="menuItem"><span>Preise</span></a>
@@ -9,6 +30,62 @@
       <a [routerLink]="['/wishes']" routerLinkActive="active" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
       <a [routerLink]="['/gallery']" routerLinkActive="active" class="menuItem"><span>Gallerie</span></a>
       <a [routerLink]="['/contact']" routerLinkActive="active" class="menuItem"><span>anfahrt</span></a>
+      <span class="menuItem zusageStatus" [matMenuTriggerFor]="zusageStatus" *ngIf="user">zusage:
+        <span class="zusageIcon">
+          <span [ngSwitch]="user?.zusage" [ngClass]="'Status'+(!user || user.zusage==undefined?'Null':user.zusage)">
+            <span *ngSwitchCase="0">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="25">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="50">
+              <fa-icon [icon]="icons[4]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="75">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+            </span>
+            <span *ngSwitchCase="100">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+            </span>
+            <span *ngSwitchDefault>
+              <fa-icon [icon]="icons[3]"></fa-icon>
+            </span>
+          </span>
+        </span>
+        <mat-menu #zusageStatus="matMenu" class="zusageMenu">
+          <button mat-menu-item (click)="setZusageStatus(50)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[4]"></fa-icon>
+              <span>Weiss noch nicht</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(0)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+              <span>Komme nicht</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(25)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[2]"></fa-icon>
+              <span>Komme ziemlich sicher nicht</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(75)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+              <span>Komme ziemlich sicher</span>
+            </span>
+          </button>
+          <button mat-menu-item (click)="setZusageStatus(100)">
+            <span class="zusage">
+              <fa-icon [icon]="icons[1]"></fa-icon>
+              <span>Komme sicher</span>
+            </span>
+          </button>
+        </mat-menu>
+      </span>
       <a (click)="login()" *ngIf="!user" class="menuItem">
         <span *ngIf="!checkingIfAlreadyLoggedIn">login</span>
         <fa-icon icon="sync" [spin]="true" *ngIf="checkingIfAlreadyLoggedIn"></fa-icon>
@@ -26,4 +103,5 @@
       </span>
     </span>
   </span>
+  </div>
 </div>
