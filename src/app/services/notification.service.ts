@@ -19,6 +19,7 @@ export class NotificationService {
 
   public showGCMNotification(payload: {title: string; body: string; icon: string}){
     console.log("Notification",payload);
+
     const html = `
       <div class="HTMLnotification">
       <div class="img">

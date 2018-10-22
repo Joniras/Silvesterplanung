@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
@@ -22,7 +22,8 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import localeDE from '@angular/common/locales/de-AT';
 import {registerLocaleData} from '@angular/common';
 import {AdminGuard} from './other/AdminGuard';
-import {MessagingService} from "./services/messaging.service";
+import {MessagingService} from './services/messaging.service';
+import {HammerConfig} from './other/hammer-config';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeDE);
@@ -48,7 +49,11 @@ registerLocaleData(localeDE);
   providers: [AdminGuard, AuthService, MessagingService, NotificationService,{
     provide: LOCALE_ID,
     useValue: 'de-AT'
-  }],
+  },{
+    // hammer instantion with custom config
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: HammerConfig,
+  },],
   bootstrap: [AppComponent],
   entryComponents: [LoginDialogComponent]
 })

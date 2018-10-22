@@ -88,8 +88,8 @@
         </a>
       </span>
   </mat-sidenav>
-  <mat-sidenav-content (swipeRight)="sidenav.open()">
-    <div fxLayout="column" fxLayoutAlign="start stretch" style="height: 100vh">
+  <mat-sidenav-content (swipeRight)="sidenav.open()" data-mc-options='{ "touchAction": "pan-y" }'>
+    <div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100vh">
       <app-header (toggleNav)="sidenav.toggle()"></app-header>
       <div fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="30px" fxFlex="auto" class="outerContainer">
         <div fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" fxFlex="94" fxFlexOffset="3" class="innerContainer" >

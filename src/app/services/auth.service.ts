@@ -30,7 +30,7 @@ export class AuthService {
 
     this.msgService.receiveMessage();
     this.msgService.currentMessage.pipe(skipWhile(v => v == null)).subscribe(v => {
-      this.notification.showGCMNotification(v.notification);
+      this.notification.showGCMNotification(v.data);
     });
   }
 
