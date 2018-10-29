@@ -5,13 +5,14 @@ exports.fcmSend = functions.database.ref('/messages/{userId}/{messageId}').onCre
     const message = event.val();
     const userId = context.params.userId;
     const payload = {
-        notification: {
+        data: {
             title: message.title,
             body: message.body,
             icon: message.img ? message.img : "https://placeimg.com/100/100/people",
             actionUrl: "localhost:4200/prices"
         }
     };
+    console.log("Payload:", payload);
     admin.database()
         .ref(`/fcmTokens/${userId}`)
         .once('value')

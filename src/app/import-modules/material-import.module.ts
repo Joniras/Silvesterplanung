@@ -12,6 +12,7 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatStepperModule,
   MatTableModule,
   MatTabsModule
 } from '@angular/material';
@@ -32,7 +33,8 @@ import {CommonModule} from '@angular/common';
     MatProgressSpinnerModule,
     MatTableModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatStepperModule
   ],
   exports: [
     MatInputModule,
@@ -48,7 +50,8 @@ import {CommonModule} from '@angular/common';
     MatProgressSpinnerModule,
     MatTableModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatStepperModule
     ],
   declarations: [
   ],

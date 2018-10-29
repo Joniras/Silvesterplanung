@@ -1,12 +1,12 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%">
   <div fxLayout="column" fxLayoutAlign="start stretch">
     <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
-      <div class="title">PreisLisTe</div>
+      <div class="title">PreisLisTe 2018</div>
     </div>
     <mat-card class="tableCard">
       <div fxLayout="column" fxLayoutAlign="start stretch">
         <div fxLayout="column" fxLayoutAlign="start stretch" class="formContainer">
-          <table mat-table [dataSource]="dataSource[selectedYear]" fxFlexOffset="10px" style="">
+          <table mat-table [dataSource]="currentData" fxFlexOffset="10px" style="">
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef> Name </th>
               <td mat-cell *matCellDef="let element"> {{element.title}} </td>
@@ -35,14 +35,8 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>
-        <div fxLayoutAlign="space-between center" fxLayout="row" fxFlexOffset="10px">
+        <div fxLayoutAlign="start center" fxLayout="row" fxFlexOffset="10px">
           <div class="credits" >Paketnamen by Gerhard Stingl</div>
-          <mat-form-field>
-            <mat-select placeholder="Jahr" #yearSelect [(value)]="selectedYear" >
-              <mat-option [value]="0" >2018</mat-option>
-              <mat-option [value]="1">2017</mat-option>
-            </mat-select>
-          </mat-form-field>
         </div>
       </div>
     </mat-card>
@@ -50,4 +44,45 @@
       Buchung, Anzahl der Plätze und Preisaufschlüsselung wird in Kürze verfügbar sein
     </div>
   </div>
+
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="30px">
+    <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
+      <div class="title">PreisLisTe 2017</div>
+    </div>
+    <mat-card class="tableCard">
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="formContainer">
+          <table mat-table [dataSource]="data2017" fxFlexOffset="10px" style="">
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+            <ng-container matColumnDef="desc">
+              <th mat-header-cell *matHeaderCellDef> Beschreibung </th>
+              <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price1">
+              <th mat-header-cell *matHeaderCellDef > 1 x Tag & Nacht </th>
+              <td mat-cell *matCellDef="let element"> {{element.price1 | currency:'EUR'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price2">
+              <th mat-header-cell *matHeaderCellDef> 2 x Tag & Nacht </th>
+              <td mat-cell *matCellDef="let element"> {{element.price2 | currency:'EUR'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="priceWoAlcohol1">
+              <th mat-header-cell *matHeaderCellDef> 1 x Tag & Nacht (ohne Alkohol)</th>
+              <td mat-cell *matCellDef="let element"> {{element.priceWoAlcohol1 | currency:'EUR'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="priceWoAlcohol2">
+              <th mat-header-cell *matHeaderCellDef> 2 x Tag & Nacht (ohne Alkohol)</th>
+              <td mat-cell *matCellDef="let element"> {{element.priceWoAlcohol2 | currency:'EUR'}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
 </div>

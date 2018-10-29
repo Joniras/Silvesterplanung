@@ -120,7 +120,7 @@ export class DrinkWishesComponent implements OnInit {
   }
 
   submit(form, name: string) {
-    console.log(this.tooltip_content);
+    // console.log(this.tooltip_content);
     if (form.status === 'VALID') {
       if (this.authenticator.getUser() && name.length != 0) {
         this.coll_wishes.add({name: name, creator: this.authenticator.getUser().ref});

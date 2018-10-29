@@ -1,1 +1,62 @@
-<app-feature-in-progress></app-feature-in-progress>
+<div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%">
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <ng-template matStepperIcon="done">
+        <fa-icon icon="check"></fa-icon>
+      </ng-template>
+      <ng-template matStepperIcon="edit">
+        <fa-icon icon="check"></fa-icon>
+      </ng-template>
+      <mat-step >
+        <ng-template matStepLabel>Paket auswählen</ng-template>
+        <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
+          <div class="title black">WÄhle ein Paket</div>
+          <div class="hint">Die Preise beziehen sich jeweils auf eine Person</div>
+          <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start stretc">
+            <mat-card class="paketCard" fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let paket of pakete" fxFlexOffset="10px">
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="pTitle">{{paket.title}} </div>
+                <div fxLayout="column" fxLayoutAlign="center center">
+                  <div class="pTitle" [ngClass]="{'noMore': paket.current < 1}">noch {{paket.current}}</div>
+                  <div class="hint">von {{paket.total}} insgesamt</div>
+                </div>
+              </div>
+              <div fxFlexOffset="10px" fxLayoutAlign="start start" fxLayout="row" *ngIf="paket.current > 0">
+                <div fxFlexOffset="20px" fxFlex="100" fxLayout="column" fxLayoutAlign="start stretch">
+                  <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="pName">1x Tag & Nacht</div>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.price1 | currency:'EUR'}}</button>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
+                    <div class="pName">2x Tag & Nacht</div>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.price2 | currency:'EUR'}}</button>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
+                    <div class="pName">1x Tag & Nacht ohne Alkohol</div>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.priceWoAlcohol1 | currency:'EUR'}}</button>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
+                    <div class="pName">2x Tag & Nacht ohne Alkohol</div>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.priceWoAlcohol2 | currency:'EUR'}}</button>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step >
+        <ng-template matStepLabel>Anzahl auswählen/Details eingeben</ng-template>
+        <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
+
+        </div>
+      </mat-step>
+      <mat-step >
+      <ng-template matStepLabel>Zahlungsdetails</ng-template>
+      <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
+        <div>Ihre Buchungsnummer</div>
+      </div>
+    </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>
