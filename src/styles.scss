@@ -53,6 +53,14 @@ app-login-dialog{
   .mat-tab-label-container{
     display: none;
   }
+  .fb-button{
+    fa-icon{
+      svg{
+        margin-top: -1px;
+        margin-bottom: -1px;
+      }
+    }
+  }
 }
 
 .mat-slide-toggle-content{
@@ -193,4 +201,13 @@ app-admin-view .deleteButton fa-icon svg{
 
 app-booking mat-horizontal-stepper{
   border-radius: 3px;
+}
+
+mat-step-header{
+  fa-icon{
+    margin-left: 5px;
+    svg{
+      margin-top: 5px;
+    }
+  }
 }

@@ -11,7 +11,7 @@ import {HeaderComponent} from './header/header.component';
 import {RouterModule} from '@angular/router';
 import {MaterialImportModule} from '../import-modules/material-import.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SameValueDirective} from '../other/sameValueAsDirective';
 import {PricesComponent} from '../pages/prices/prices.component';
@@ -32,6 +32,7 @@ import {NgxImageGalleryModule} from 'ngx-image-gallery';
     TooltipModule,
     NgbModule,
     NgxImageGalleryModule,
+    ReactiveFormsModule
   ],
   declarations: [
     PageNotFoundComponent,

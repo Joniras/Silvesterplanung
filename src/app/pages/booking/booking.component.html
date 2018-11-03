@@ -1,14 +1,19 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%">
   <div fxLayout="column" fxLayoutAlign="start stretch">
-    <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-horizontal-stepper [linear]="true" #stepper >
       <ng-template matStepperIcon="done">
         <fa-icon icon="check"></fa-icon>
       </ng-template>
       <ng-template matStepperIcon="edit">
         <fa-icon icon="check"></fa-icon>
       </ng-template>
-      <mat-step >
+      <mat-step [optional]="false" [stepControl]="firstStepForm" #firstStep>
         <ng-template matStepLabel>Paket auswählen</ng-template>
+        <form [formGroup]="firstStepForm">
+        <mat-form-field style="display: none">
+          <input matInput placeholder="" type="text" formControlName="firstCtrl" required>
+        </mat-form-field>
+        </form>
         <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
           <div class="title black">WÄhle ein Paket</div>
           <div class="hint">Die Preise beziehen sich jeweils auf eine Person</div>
@@ -25,19 +30,19 @@
                 <div fxFlexOffset="20px" fxFlex="100" fxLayout="column" fxLayoutAlign="start stretch">
                   <div fxLayout="row" fxLayoutAlign="space-between center">
                     <div class="pName">1x Tag & Nacht</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.price1 | currency:'EUR'}}</button>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'price1')">{{paket.price1 | currency:'EUR'}}</button>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
                     <div class="pName">2x Tag & Nacht</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.price2 | currency:'EUR'}}</button>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'price2')">{{paket.price2 | currency:'EUR'}}</button>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
                     <div class="pName">1x Tag & Nacht ohne Alkohol</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.priceWoAlcohol1 | currency:'EUR'}}</button>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'priceWoAlcohol1')">{{paket.priceWoAlcohol1 | currency:'EUR'}}</button>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
                     <div class="pName">2x Tag & Nacht ohne Alkohol</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1">{{paket.priceWoAlcohol2 | currency:'EUR'}}</button>
+                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'priceWoAlcohol2')">{{paket.priceWoAlcohol2 | currency:'EUR'}}</button>
                   </div>
                 </div>
               </div>
@@ -45,14 +50,51 @@
           </div>
         </div>
       </mat-step>
-      <mat-step >
+      <mat-step #secondStep [stepControl]="secondStepForm" [optional]="false">
         <ng-template matStepLabel>Anzahl auswählen/Details eingeben</ng-template>
+        <form [formGroup]="secondStepForm">
+          <mat-form-field style="display: none">
+            <input matInput placeholder="" type="text" formControlName="secondCtrl" required>
+          </mat-form-field>
+        </form>
         <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
-
+          <h2 class="title black">Gewähltes Paket: {{selectedPaket?.paket.title}}</h2>
+          <div class="hint">
+            <div [ngSwitch]="selectedPaket?.type">
+              <div *ngSwitchCase="'price1'">
+                1x Tag & Nacht
+              </div>
+              <div *ngSwitchCase="'price2'">
+                2x Tag & Nacht
+              </div>
+              <div *ngSwitchCase="'priceWoAlcohol'">
+                1x Tag & Nacht ohne Alkohol
+              </div>
+              <div *ngSwitchCase="'priceWoAlcoho2'">
+                1x Tag & Nacht ohne Alkohol
+              </div>
+            </div>
+          </div>
+          <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start stretch">
+            <div *ngFor="let person of persons; let i = index" fxLayout="row" fxLayoutAlign="start start">
+              <mat-form-field fxFlex="300px">
+                <input type="text" matInput="" class="black" [(ngModel)]="person.name" required placeholder="Name (damit ich circa weiss wer kommt)">
+              </mat-form-field>
+              <button mat-mini-fab="" (click)="removePerson()">
+                <fa-icon icon="minus" color="warn"></fa-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-mini-fab="" (click)="addUser()"><fa-icon icon="plus"></fa-icon></button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button (click)="savePersons()" color="primary" mat-raised-button="">Abschliessen</button>
+          </div>
         </div>
       </mat-step>
       <mat-step >
-      <ng-template matStepLabel>Zahlungsdetails</ng-template>
+      <ng-template matStepLabel>Abschluss & Zahlungsdetails</ng-template>
       <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
         <div>Ihre Buchungsnummer</div>
       </div>

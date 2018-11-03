@@ -45,13 +45,16 @@
           </div>
           <br>
           <div class="otherLoginContainer" fxLayout="column" fxLayoutAlign="start stretch">
-            <a style="margin-bottom: 3px;" mat-raised-button=""  (click)="facebookLogin()" >
-              <fa-icon [icon]="['fab','facebook-f']"></fa-icon>
-              <span  style="margin-left:8px">Mit Facebook anmelden</span>
+            <a style="margin-bottom: 3px;" mat-raised-button=""  (click)="facebookLogin()" class="fb-button"  fxLayout="row" fxLayoutAlign="space-between center">
+              <fa-icon [icon]="['fab','facebook']"></fa-icon>
+              <span  style="margin-left:13px">Mit Facebook anmelden</span>
             </a>
-            <a mat-raised-button="" (click)="googleLogin()">
-              <fa-icon [icon]="['fab','google-plus-g']"></fa-icon>
-              <span style="margin-left:8px">Mit Google anmelden</span></a>
+            <div class="google-btn" (click)="googleLogin()" fxFlexOffset="5px">
+              <div class="google-icon-wrapper">
+                <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+              </div>
+              <p class="btn-text"><b>Mit Google anmelden</b></p>
+            </div>
           </div>
           <br/>
           <div class="login-help" fxLayout="column" fxLayoutAlign="center center">

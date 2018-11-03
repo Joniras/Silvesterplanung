@@ -1,10 +1,13 @@
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faBars, faCheck, faHeart, faInfoCircle, faLock, faPlus, faSignOutAlt, faSync, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {faFacebookF, faGooglePlusG} from '@fortawesome/free-brands-svg-icons';
+import {faSync} from '@fortawesome/free-solid-svg-icons/faSync';
+import {faGooglePlusG} from '@fortawesome/free-brands-svg-icons/faGooglePlusG';
+import {faBars, faCheck, faHeart, faInfoCircle, faMinus, faPlus, faSignOutAlt, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faLock} from '@fortawesome/free-solid-svg-icons/faLock';
+import {faFacebook} from "@fortawesome/free-brands-svg-icons";
 
 library.add(
     faSync
-  , faFacebookF
+  , faFacebook
   , faGooglePlusG
   , faPlus
   , faHeart
@@ -14,4 +17,5 @@ library.add(
   , faInfoCircle
   , faTimes
   , faCheck
+  , faMinus
 );
