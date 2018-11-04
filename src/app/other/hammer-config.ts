@@ -16,9 +16,10 @@ export class HammerConfig extends HammerGestureConfig {
         console.error('An error occurred when attempting to parse Hammer.js options: ', err);
       }
     }
-
+    delete Hammer.defaults.cssProps.userSelect;
     const mc = new Hammer(element, options);
 
+    delete Hammer.defaults.cssProps.userSelect;
     // keep default angular config
     mc.get('pinch').set({enable: true});
     mc.get('rotate').set({enable: true});

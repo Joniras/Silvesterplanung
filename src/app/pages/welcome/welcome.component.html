@@ -1,15 +1,24 @@
 <div class="welcomeContainer" fxLayout="column" fxLayoutAlign="start center" >
   <div fxLayout="column" fxLayoutAlign="center center" fxFlex="auto">
-    <div fxLayoutAlign="start stretch" fxLayout="column" class="welcomeMessage" ngClass.gt-sm="fixedWidth" >
-      <div fxLayout="row" fxLayoutAlign="start center" >
-        <span>Hier findest du alle Infos zur</span>
-      </div>
-      <div fxLayout="row" fxLayoutAlign.gt-sm="end center" fxLayoutAlign="start center">
-        <span>letzten und ersten Party des Jahres</span>
-      </div>
-    </div>
+    <mat-tab-group #tabGroup>
+      <mat-tab label="First">
+        <div fxLayoutAlign="start stretch" fxLayout="column" class="welcomeMessage" ngClass.gt-sm="fixedWidth" >
+          <div fxLayout="row" fxLayoutAlign="start center" >
+            <span>Hier findest du alle Infos zur</span>
+          </div>
+          <div fxLayout="column" fxLayoutAlign.gt-sm="center end" fxLayoutAlign="start center">
+            <span>letzten und ersten Party des Jahres</span>
+            <span class="moreLink" (click)="moreInfos()">Mehr Infos <fa-icon icon="info-circle"></fa-icon></span>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Second" >
+      <app-feature-in-progress (click)="tabGroup.selectedIndex = 0"></app-feature-in-progress>
+      </mat-tab>
+    </mat-tab-group>
+
   </div>
-  <div class="citeContainer" fxLayout="row" fxLayoutAlign="center center" *ngIf="cites && index"
+  <div class="citeContainer" fxLayout="row" fxLayoutAlign="center center" *ngIf="cites && index>=0"
        (click)="refreshCite()">
     <div class="cite" fxLayout="column" fxLayoutAlign="start stretch">
       <div class="citeText" fxLayout="row" fxLayoutAlign="center start">

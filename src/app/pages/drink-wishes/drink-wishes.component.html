@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%" id="wishes">
+<div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%" id="wishes" data-mc-options='{ "touchAction": "pan-y" }'>
   <div class="loading" [@loading]="loading?'yes':'no'" fxLayout="row" fxLayoutAlign="center start">
     <mat-card><div fxLayout="column" fxLayoutAlign="start center">
       <div >Wünsche werden geladen</div>
@@ -24,8 +24,9 @@
           </span>
         </span>
           <span class="creator" fxFlex="30px" fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="20px" >
-          <span class="creatorImg" fxLayout="row" fxLayoutAlign="start center" [title]="wish.creator.displayName">
-            <img [src]="wish.creator.photoUrl">
+          <span class="creatorImg" fxLayout="row" fxLayoutAlign="start center" [title]="wish.creator?.displayName">
+            <img [src]="wish.creator?.photoUrl">
+
           </span>
         </span>
           <span class="colon" fxLayoutAlign="start center" fxFlexOffset="10px">

@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 @font-face {
   font-family: 'Monthoers';
@@ -71,16 +71,14 @@ mat-sidenav-container, mat-sidenav-content{
   height: 100vh;
 }
 
-.mat-drawer-container, #sideNav{
-  background-color: inherit;
-  color: white;
+.mat-drawer-container{
+  background-color: inherit !important;
+  color: white !important;
 }
 
 .simple-notification-wrapper{
   z-index: 10000;
 }
-
-
 
 .tooltip.bottom .tooltip-arrow {
   border-bottom-color: white;
@@ -209,5 +207,11 @@ mat-step-header{
     svg{
       margin-top: 5px;
     }
+  }
+}
+
+.welcomeContainer{
+  mat-tab-header{
+    display: none !important;
   }
 }

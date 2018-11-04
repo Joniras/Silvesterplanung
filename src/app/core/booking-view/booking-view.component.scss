@@ -1,0 +1,66 @@
+.bookingOverview{
+  .person{
+    .name{
+      font-size: 22px;
+    }
+  }
+  .price{
+    font-size: 28px;
+    color: #008800;
+    font-weight: bold;
+  }
+  .total{
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .dueDate{
+    font-size: 20px;
+    color: #308dff;
+  }
+  .due{
+    font-size: 25px;
+    color: #ff6534;
+  }
+  .cancel{
+    color: #ff1f19;
+    font-size: 25px;
+    cursor: pointer;
+  }
+}
+.bestaetigung{
+  .or{
+    color: darkgrey;
+  }
+  .price{
+    font-size: 28px;
+    color: #008800;
+    font-weight: bold;
+  }
+}
+
+.paid,.done{
+  font-size: 28px;
+  color: #008800;
+  font-weight: bold;
+}
+
+.npaid{
+  font-size: 28px;
+  color: #ff1f19;
+  font-weight: bold;
+}
+
+.type{
+  color: #a7a7a7;
+}
+.bank, .paypal{
+  padding-top: 5px;
+}
+
+.icon{
+  font-size: 40px;
+}
+
+.booking{
+  padding-top: 10px;
+}

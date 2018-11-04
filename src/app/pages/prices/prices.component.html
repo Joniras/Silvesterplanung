@@ -31,6 +31,14 @@
               <th mat-header-cell *matHeaderCellDef> 2 x Tag & Nacht (ohne Alkohol)</th>
               <td mat-cell *matCellDef="let element"> {{element.priceWoAlcohol2 | currency:'EUR'}} </td>
             </ng-container>
+            <ng-container matColumnDef="current30">
+              <th mat-header-cell *matHeaderCellDef> Verfügbar am 30.</th>
+              <td mat-cell *matCellDef="let element"> {{element.current30 }}/{{element.total30}} </td>
+            </ng-container>
+            <ng-container matColumnDef="current31">
+              <th mat-header-cell *matHeaderCellDef> Verfügbar am 31.</th>
+              <td mat-cell *matCellDef="let element"> {{element.current31 }}/{{element.total31}} </td>
+            </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
@@ -41,7 +49,7 @@
       </div>
     </mat-card>
     <div fxFlexOffset="10px">
-      Buchung, Anzahl der Plätze und Preisaufschlüsselung wird in Kürze verfügbar sein
+      Auf Anfrage können auch mehr Plätze zur Verfügung gestellt werden
     </div>
   </div>
 
@@ -77,8 +85,8 @@
               <th mat-header-cell *matHeaderCellDef> 2 x Tag & Nacht (ohne Alkohol)</th>
               <td mat-cell *matCellDef="let element"> {{element.priceWoAlcohol2 | currency:'EUR'}} </td>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsPast"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsPast;"></tr>
           </table>
         </div>
       </div>

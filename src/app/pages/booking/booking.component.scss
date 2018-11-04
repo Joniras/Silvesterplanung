@@ -31,3 +31,101 @@
 .paketCard{
   padding: 12px;
 }
+
+.bookingOverview{
+  .person{
+    .name{
+      font-size: 22px;
+    }
+  }
+  .price{
+    font-size: 28px;
+    color: #008800;
+    font-weight: bold;
+  }
+  .total{
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .dueDate{
+    font-size: 20px;
+    color: #308dff;
+  }
+  .due{
+    font-size: 25px;
+    color: #ff6534;
+  }
+  .cancel{
+    color: #ff1f19;
+    font-size: 25px;
+    cursor: pointer;
+  }
+}
+.bestaetigung{
+  .or{
+    color: darkgrey;
+  }
+  .price{
+    font-size: 28px;
+    color: #008800;
+    font-weight: bold;
+  }
+  .dueDate{
+    font-size: 20px;
+    color: #308dff;
+  }
+}
+
+.paid{
+    font-size: 28px;
+    color: #008800;
+    font-weight: bold;
+}
+
+.npaid{
+  font-size: 28px;
+  color: #ff1f19;
+  font-weight: bold;
+}
+
+.type{
+  color: #a7a7a7;
+}
+.bank, .paypal{
+  padding-top: 5px;
+}
+
+.icon{
+  font-size: 40px;
+}
+
+.booking{
+  padding-top: 10px;
+}
+
+.boxShadow{
+  box-shadow: 0 0 5px black;
+  border-radius: 5px;
+  padding: 13px;
+  margin-top: 10px;
+}
+
+.red{
+  color: red;
+}
+.resetButton{
+  opacity: 0.5;
+}
+
+
+.notLoggedInOverlay{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.71);
+  z-index: 1000;
+  border-radius: 5px;
+  color: black;
+}

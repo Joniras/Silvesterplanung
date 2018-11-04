@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <div *ngIf="dayChart" fxFlex="300px">
+    <canvas baseChart
+            [datasets]="dayChart.data"
+            [labels]="dayChart.labels"
+            [options]="dayChart.options"
+            [chartType]="'bar'"></canvas>
+  </div>
+  <div fxLayoutAlign="space-between center" fxLayout="row" fxFlexOffset="20px">
+    <canvas fxFlex="20" baseChart *ngFor="let percentage of bookingPercentage"
+            [data]="percentage.data"
+            [labels]="percentage.labels"
+            [options]="percentage.options"
+            [chartType]="'doughnut'"></canvas>
+  </div>
+</div>
+
+
+

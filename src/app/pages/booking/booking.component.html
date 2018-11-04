@@ -1,5 +1,8 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%">
-  <div fxLayout="column" fxLayoutAlign="start stretch">
+  <div fxLayout="column" fxLayoutAlign="start stretch" style="position: relative">
+    <span class="notLoggedInOverlay" fxLayout="column" fxLayoutAlign="center center" *ngIf="!(user|async)">
+        <span><fa-icon icon="lock"></fa-icon> Login erforderlich</span>
+      </span>
     <mat-horizontal-stepper [linear]="true" #stepper >
       <ng-template matStepperIcon="done">
         <fa-icon icon="check"></fa-icon>
@@ -7,98 +10,211 @@
       <ng-template matStepperIcon="edit">
         <fa-icon icon="check"></fa-icon>
       </ng-template>
-      <mat-step [optional]="false" [stepControl]="firstStepForm" #firstStep>
-        <ng-template matStepLabel>Paket auswählen</ng-template>
-        <form [formGroup]="firstStepForm">
-        <mat-form-field style="display: none">
-          <input matInput placeholder="" type="text" formControlName="firstCtrl" required>
-        </mat-form-field>
-        </form>
-        <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
-          <div class="title black">WÄhle ein Paket</div>
-          <div class="hint">Die Preise beziehen sich jeweils auf eine Person</div>
-          <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start stretc">
-            <mat-card class="paketCard" fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let paket of pakete" fxFlexOffset="10px">
-              <div fxLayout="row" fxLayoutAlign="space-between center">
-                <div class="pTitle">{{paket.title}} </div>
-                <div fxLayout="column" fxLayoutAlign="center center">
-                  <div class="pTitle" [ngClass]="{'noMore': paket.current < 1}">noch {{paket.current}}</div>
-                  <div class="hint">von {{paket.total}} insgesamt</div>
+      <mat-step #firstStep [stepControl]="persons" [optional]="false">
+        <ng-template matStepLabel>Details eingeben</ng-template>
+          <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start stretch">
+            <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="persons" (ngSubmit)="addRow()">
+              <div *ngFor="let person of currentPersons; let i = index" fxLayout="row" fxLayoutAlign="space-between center" [formGroupName]="'person'+person" ngClass.sm="boxShadow" ngClass.lt-sm="boxShadow">
+                <div  fxLayout="column" fxLayoutAlign="start stretch">
+                  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center">
+                    <mat-form-field fxFlex.gt-sm="150px">
+                      <input type="text" matInput="" formControlName="name" class="black" minlength="2" required placeholder="Name">
+                      <mat-error >
+                        Gib einen Namen ein
+                      </mat-error>
+                      <mat-hint *ngIf="persons.get('person'+person).get('package').value?.title=='Bourgeoisie-Paar'">Bitte beide Namen angeben</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field fxFlexOffset="5px" *ngIf="!persons.get('person'+person).get('noSleep').value">
+                      <mat-select formControlName="package" placeholder="Paket auswählen" [required]="!persons.get('person'+person).get('noSleep').value" (selectionChange)="paketChanged(person,$event)">
+                        <mat-select-trigger>
+                          {{persons.get('person'+person).get('package').value?.title}}
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let paket of pakete" [value]="paket"  [disabled]="paket.current31==0 && paket.current30==0" >
+                          <div fxLayoutAlign="space-between center" fxLayout="row">
+                            <div >
+                              {{paket.title}}
+                            </div>
+                            <div>
+                              <b>30.:&nbsp;</b> <span [ngClass]="{'red':paket.current30==0}">{{paket.current30| number: '2.0'}}</span>&nbsp;|&nbsp;<b>31.:&nbsp;</b> <span [ngClass]="{'red':paket.current31==0}">{{paket.current31| number: '2.0'}}</span>
+                            </div>
+                          </div>
+                        </mat-option>
+                      </mat-select>
+                      <mat-error >
+                        Wähle ein Paket aus
+                      </mat-error>
+                      <mat-hint *ngIf="persons.get('person'+person).get('package').value?.title=='Bourgeoisie-Paar'">Eine Buchung gilt für 2 Personen</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field fxFlexOffset="5px">
+                      <mat-select formControlName="nights" placeholder="#Nächte auswählen" required>
+                        <mat-option [value]="1">
+                          1x Tag & Nacht
+                        </mat-option>
+                        <mat-option [value]="2">
+                          2x Tag & Nacht
+                        </mat-option>
+                      </mat-select>
+                      <mat-error>
+                        Wähle die Anzahl der Nächte aus
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field fxFlexOffset="5px" *ngIf="persons.get('person'+person).get('nights').value==1 " >
+                      <mat-select formControlName="startNight" placeholder="Ankunftstag auswählen" required>
+                        <mat-option [value]="30">
+                          komme am 30. Dezember an
+                        </mat-option>
+                        <mat-option [value]="31">
+                          komme am 31. Dezember an
+                        </mat-option>
+                      </mat-select>
+                      <mat-error>
+                        Wähle den Ankunftstag aus
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center" fxFlexOffset="5px">
+                    <div fxLayout="row" fxLayoutAlign="start center" class="black" fxFlexOffset="10px" fxFlexOffset.gt-sm="0">
+                      <mat-checkbox formControlName="alcohol" [checked]="true"  fxFlexOffset="5px">mit Alkohol</mat-checkbox>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center" class="black" fxFlexOffset="10px">
+                      <mat-checkbox formControlName="noSleep" [checked]="false"  fxFlexOffset="5px" (change)="paketChanged(person)">Ich schlafe woanders</mat-checkbox>
+                    </div>
+                  </div>
                 </div>
+                <button mat-mini-fab="" (click)="removePerson(person, i)" color="warn" >
+                  <fa-icon icon="minus" ></fa-icon>
+                </button>
               </div>
-              <div fxFlexOffset="10px" fxLayoutAlign="start start" fxLayout="row" *ngIf="paket.current > 0">
-                <div fxFlexOffset="20px" fxFlex="100" fxLayout="column" fxLayoutAlign="start stretch">
-                  <div fxLayout="row" fxLayoutAlign="space-between center">
-                    <div class="pName">1x Tag & Nacht</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'price1')">{{paket.price1 | currency:'EUR'}}</button>
-                  </div>
-                  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
-                    <div class="pName">2x Tag & Nacht</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'price2')">{{paket.price2 | currency:'EUR'}}</button>
-                  </div>
-                  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
-                    <div class="pName">1x Tag & Nacht ohne Alkohol</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'priceWoAlcohol1')">{{paket.priceWoAlcohol1 | currency:'EUR'}}</button>
-                  </div>
-                  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="5px">
-                    <div class="pName">2x Tag & Nacht ohne Alkohol</div>
-                    <button mat-raised-button="" color="primary" [disabled]="paket.current < 1" (click)="setPaket(paket, 'priceWoAlcohol2')">{{paket.priceWoAlcohol2 | currency:'EUR'}}</button>
-                  </div>
+              <div fxFlexOffset="10px">
+                <button mat-mini-fab="" type="submit" color="accent"><fa-icon icon="plus"></fa-icon></button>
+              </div>
+            </form>
+          </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlexOffset="40px">
+          <div fxLayout="column" fxLayoutAlign="start center">
+            <button (click)="savePersons()" color="primary" mat-raised-button="">Weiter</button>
+            <div class="hint" fxFlexOffset="5px">Im nächsten Schritt kannst du alles nochmal prüfen</div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step #secondStep [stepControl]="acceptAGB">
+      <ng-template matStepLabel>Übersicht</ng-template>
+      <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch" class="black">
+        <div class="title">
+          Deine GewÜnschte Buchung
+        </div>
+        <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start stretch" class="bookingOverview">
+          <div *ngFor="let person of overviewValue" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="column" fxLayoutAlign="start start" class="person">
+              <div class="name">{{person.name}}</div>
+              <div class="package">Paket: {{person.package}} <a [routerLink]="['/prices']" target="_blank" title="Was bedeutet das ?"><fa-icon icon="question-circle"></fa-icon></a></div>
+              <div class="nights">{{person.nights}}x Tag & Nacht</div>
+              <div class="alcohol">
+                <fa-icon icon="wine-bottle"></fa-icon>:&nbsp;
+                <span *ngIf="person.alcohol"><fa-icon icon="check"></fa-icon></span>
+                <span *ngIf="!person.alcohol"><fa-icon icon="times"></fa-icon></span>
+              </div>
+              <div class="bed">
+                <fa-icon icon="bed"></fa-icon>:&nbsp;
+                <span *ngIf="!person.noSleep"><fa-icon icon="check"></fa-icon></span>
+                <span *ngIf="person.noSleep"><fa-icon icon="times"></fa-icon></span>
+              </div>
+              <div class="arrival">
+                Ankunft:&nbsp;{{person.startNight}}. Dezember
+              </div>
+            </div>
+            <div class="price">
+              {{person.price | currency: 'EUR'}}
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlexOffset="10px">
+            <div class="total">
+              Gesamt:
+            </div>
+            <div class="price" fxFlexOffset="30px">
+              {{overviewPrice| currency: 'EUR'}}
+            </div>
+          </div>
+          <div fxFlexOffset="30px" fxLayout="row" fxLayoutAlign="space-between center">
+            <button (click)="resetStepper()" mat-raised-button="" class="resetButton" color="warn" [disabled]="bookingInProgress">Reset</button>
+            <div fxLayout="column" fxLayoutAlign="start end">
+              <button (click)="accept()" mat-raised-button="" color="primary" [disabled]="bookingInProgress">
+                <span *ngIf="!bookingInProgress">Reservieren & Zahlen</span>
+                <span *ngIf="bookingInProgress"><fa-icon icon="sync" [spin]="true"></fa-icon></span>
+              </button>
+              <div class="hint" fxFlexOffset="5px">Du hast dann eine Woche Zeit zu zahlen, danach verfällt die Reservierung</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+      <mat-step >
+        <ng-template matStepLabel>Reservierungsbestätigung</ng-template>
+        <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch" class="black bestaetigung">
+          <div class="title">
+            ReservierungsbestÄtigung
+          </div>
+          <div fxFlexOffset="5px" class="dueDate">
+            Die Reservierung läuft am {{currentBooking?.dueDate | date: 'fullDate'}} ab
+          </div>
+          <div fxFlexOffset="10px">
+            Reservierungsnummer:&nbsp;&nbsp;<b>{{currentBooking?.bookingId}}</b>
+          </div>
+          <div fxFlexOffset="20px" fxLayout="column" fxLayoutAlign="start start">
+            <div>
+              Zahle, bevor die Reservierung abläuft:
+            </div>
+            <mat-card class="bank" fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="4px">
+              <div class="type">Banküberweisung</div>
+              <div fxFlexOffset="10px"  fxLayout="row" fxLayoutAlign="start center">
+                <div class="icon">
+                  <fa-icon icon="university"></fa-icon>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center start" fxFlexOffset="20px">
+                  <div style="font-size: 15px">Jonas Schaltegger</div>
+                  <div fxFlexOffset="4px">IBAN: AT76 3928 8000 0001 8341</div>
+                  <div>BIC:  RZKTAT2K288</div>
+                  <div>Verwendungszweck: {{currentBooking?.bookingId}}</div>
                 </div>
               </div>
             </mat-card>
-          </div>
-        </div>
-      </mat-step>
-      <mat-step #secondStep [stepControl]="secondStepForm" [optional]="false">
-        <ng-template matStepLabel>Anzahl auswählen/Details eingeben</ng-template>
-        <form [formGroup]="secondStepForm">
-          <mat-form-field style="display: none">
-            <input matInput placeholder="" type="text" formControlName="secondCtrl" required>
-          </mat-form-field>
-        </form>
-        <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
-          <h2 class="title black">Gewähltes Paket: {{selectedPaket?.paket.title}}</h2>
-          <div class="hint">
-            <div [ngSwitch]="selectedPaket?.type">
-              <div *ngSwitchCase="'price1'">
-                1x Tag & Nacht
-              </div>
-              <div *ngSwitchCase="'price2'">
-                2x Tag & Nacht
-              </div>
-              <div *ngSwitchCase="'priceWoAlcohol'">
-                1x Tag & Nacht ohne Alkohol
-              </div>
-              <div *ngSwitchCase="'priceWoAlcoho2'">
-                1x Tag & Nacht ohne Alkohol
-              </div>
+            <div class="or" fxFlexOffset="5px">
+              oder
             </div>
-          </div>
-          <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start stretch">
-            <div *ngFor="let person of persons; let i = index" fxLayout="row" fxLayoutAlign="start start">
-              <mat-form-field fxFlex="300px">
-                <input type="text" matInput="" class="black" [(ngModel)]="person.name" required placeholder="Name (damit ich circa weiss wer kommt)">
-              </mat-form-field>
-              <button mat-mini-fab="" (click)="removePerson()">
-                <fa-icon icon="minus" color="warn"></fa-icon>
-              </button>
-            </div>
-            <div>
-              <button mat-mini-fab="" (click)="addUser()"><fa-icon icon="plus"></fa-icon></button>
+            <mat-card class="paypal" fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="5px">
+              <div class="type">PayPal</div>
+              <div fxFlexOffset="10px"  fxLayout="row" fxLayoutAlign="start center">
+                <div class="icon">
+                  <fa-icon [icon]="['fab','paypal']"></fa-icon>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center start" fxFlexOffset="20px">
+                  <div style="font-size: 15px">Jonas Schaltegger</div>
+                  <div fxFlexOffset="4px">Email: jonas.schaltegger@gmail.com</div>
+                  <div>Nachricht: {{currentBooking?.bookingId}}</div>
+                </div>
+              </div>
+            </mat-card>
+            <div class="total" fxFlexOffset="10px" >
+              <div class="price">{{currentBooking?.price | currency: 'EUR'}}</div>
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center">
-            <button (click)="savePersons()" color="primary" mat-raised-button="">Abschliessen</button>
+            <button (click)="resetStepper()" mat-raised-button="" class="resetButton" color="warn" [disabled]="bookingInProgress">Nochmal !</button>
           </div>
         </div>
       </mat-step>
-      <mat-step >
-      <ng-template matStepLabel>Abschluss & Zahlungsdetails</ng-template>
-      <div style="width: 100%" fxLayout="column" fxLayoutAlign="start stretch">
-        <div>Ihre Buchungsnummer</div>
-      </div>
-    </mat-step>
     </mat-horizontal-stepper>
+  </div>
+
+  <div fxFlexOffset="20px" fxLayout="column" fxLayoutAlign="start stretch" >
+    <div class="title" *ngIf="pastBookings.length > 0">
+      Vorhandene Buchungen:
+    </div>
+    <div class="title" *ngIf="pastBookings.length == 0">
+      Bisher keine Reservierungen getÄtigt
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+      <app-booking-view *ngFor="let booking of pastBookings" [booking]="booking" (cancelBooking)="cancelBooking(booking)" fxFlexOffset="10px"></app-booking-view>
+    </div>
   </div>
 </div>

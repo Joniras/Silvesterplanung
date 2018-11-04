@@ -20,6 +20,10 @@ import {TooltipModule} from 'ngx-tooltip';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminViewComponent} from '../pages/admin-view/admin-view.component';
 import {NgxImageGalleryModule} from 'ngx-image-gallery';
+import {BookingViewComponent} from './booking-view/booking-view.component';
+import {BookingOverviewComponent} from '../pages/admin-view/booking-overview/booking-overview.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -32,7 +36,9 @@ import {NgxImageGalleryModule} from 'ngx-image-gallery';
     TooltipModule,
     NgbModule,
     NgxImageGalleryModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ChartsModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -47,6 +53,8 @@ import {NgxImageGalleryModule} from 'ngx-image-gallery';
     PricesComponent,
     FeatureInProgressComponent,
     AdminViewComponent,
+    BookingViewComponent,
+    BookingOverviewComponent
   ],
   exports: [
       HeaderComponent

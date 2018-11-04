@@ -10,7 +10,8 @@ import {take} from 'rxjs/operators';
 export class PricesComponent implements OnInit {
   public data2017 = TableData2017;
   public currentData = [];
-  public displayedColumns: string[] = ['title', 'desc', 'price1', 'price2', 'priceWoAlcohol1', 'priceWoAlcohol2'];
+  public displayedColumns: string[] = ['title', 'desc', 'price1', 'price2', 'priceWoAlcohol1', 'priceWoAlcohol2', 'current30', 'current31'];
+  public displayedColumnsPast: string[] = ['title', 'desc', 'price1', 'price2', 'priceWoAlcohol1', 'priceWoAlcohol2'];
 
   constructor(private fireStore: AngularFirestore) {
     this.fireStore.collection('rest-places').valueChanges().pipe(take(1)).subscribe(v => {
@@ -21,7 +22,7 @@ export class PricesComponent implements OnInit {
         elem.title = vElementKey;
         data.push(elem);
       }
-      data.sort((a,b) => (a.rank > b.rank) ? 1 : ((b.rank > a.rank) ? -1 : 0));
+      data.sort((a, b) => (a.rank > b.rank) ? 1 : ((b.rank > a.rank) ? -1 : 0));
       this.currentData = data;
     });
   }

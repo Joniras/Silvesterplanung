@@ -6,7 +6,6 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SimpleNotificationsModule} from 'angular2-notifications';
@@ -35,7 +34,6 @@ registerLocaleData(localeDE);
   imports: [
     BrowserModule,
     CoreModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     MaterialImportModule,
     FontAwesomeModule,
@@ -50,7 +48,6 @@ registerLocaleData(localeDE);
     provide: LOCALE_ID,
     useValue: 'de-AT'
   },{
-    // hammer instantion with custom config
     provide: HAMMER_GESTURE_CONFIG,
     useClass: HammerConfig,
   },],

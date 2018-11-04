@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {MatTabGroup} from '@angular/material';
 
 @Component({
   selector: 'app-welcome',
@@ -9,6 +10,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 export class WelcomeComponent implements OnInit {
   public cites: Cite[] = [];
   public index = null;
+  @ViewChild("tabGroup")
+  public tabGroup: MatTabGroup;
 
   constructor(private db: AngularFirestore) {
     this.db.collection('/cites').valueChanges().subscribe((v: Cite[]) => {
@@ -21,9 +24,15 @@ export class WelcomeComponent implements OnInit {
   }
 
   refreshCite() {
-    console.log("Old index", this.index);
-    this.index = Math.floor(Math.random() * this.cites.length);
-    console.log("New index", this.index);
+    let newIndex = null;
+    do {
+      newIndex = Math.floor(Math.random() * this.cites.length);
+    } while (this.index === newIndex);
+    this.index = newIndex;
+  }
+
+  moreInfos(){
+    this.tabGroup.selectedIndex = 1;
   }
 }
 

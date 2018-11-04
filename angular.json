@@ -23,9 +23,12 @@
               "src/firebase-messaging-sw.js"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/sass/theme.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.bundle.js"
+            ]
           },
           "configurations": {
             "production": {

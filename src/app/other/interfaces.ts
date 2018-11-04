@@ -8,5 +8,6 @@ export interface UserProfile {
     photoUrl: string;
     admin: boolean;
   zusage: number;
+  originalDisplayName: string;
 }
 

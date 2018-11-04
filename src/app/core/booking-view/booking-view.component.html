@@ -1,0 +1,111 @@
+<mat-card class="booking">
+  <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start stretch" class="bookingOverview" style="width: 100%">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <div class="dueDate" *ngIf="!booking.paid">Läuft ab am {{booking.dueDate | date: 'shortDate'}}</div>
+        <div class="due" *ngIf="!booking.paid && currentDate > booking.dueDate">Abgelaufen !!</div>
+        <div class="done" *ngIf="booking.paid">Buchung akzeptiert</div>
+      </div>
+      <div class="cancel" (click)="cancel()" title="Reservierung stornieren">
+        <fa-icon [icon]="['far','trash-alt']" *ngIf="(currentDate < booking.dueDate ) && !booking.paid || adminView "></fa-icon>
+      </div>
+    </div>
+
+    <div fxFlexOffset="5px">
+      <span *ngIf="!booking.paid">Reservierungsnummer:</span>
+      <span *ngIf="booking.paid">Buchungsnummer:</span>
+      &nbsp;&nbsp;<b>{{booking.bookingId}}</b>
+    </div>
+    <div *ngFor="let person of booking.persons" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="column" fxLayoutAlign="start start" class="person">
+        <div class="name">{{person.name}}</div>
+        <div class="package">Paket: {{person.package}} <a [routerLink]="['/prices']" target="_blank" title="Was bedeutet das ?"><fa-icon icon="question-circle"></fa-icon></a></div>
+        <div class="nights">{{person.nights}}x Tag & Nacht</div>
+        <div class="alcohol">
+          <fa-icon icon="wine-bottle"></fa-icon>:&nbsp;
+          <span *ngIf="person.alcohol"><fa-icon icon="check"></fa-icon></span>
+          <span *ngIf="!person.alcohol"><fa-icon icon="times"></fa-icon></span>
+        </div>
+        <div class="bed">
+          <fa-icon icon="bed"></fa-icon>:&nbsp;
+          <span *ngIf="!person.noSleep"><fa-icon icon="check"></fa-icon></span>
+          <span *ngIf="person.noSleep"><fa-icon icon="times"></fa-icon></span>
+        </div>
+        <div class="arrival">
+          Ankunft:&nbsp;{{person.startNight}}. Dezember
+        </div>
+      </div>
+      <div class="price">
+        {{person.price | currency: 'EUR'}}
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxFlexOffset="10px">
+      <div class="total">
+        Gesamt:
+      </div>
+      <div class="price" fxFlexOffset="30px">
+        {{booking.price| currency: 'EUR'}}
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxFlexOffset="10px">
+      <div class="total">
+        Gezahlt:
+      </div>
+      <div class="paid" fxFlexOffset="30px" *ngIf="booking.paid">
+        <fa-icon icon="check">
+        </fa-icon>
+      </div>
+      <div class="npaid" fxFlexOffset="30px" *ngIf="!booking.paid">
+        <fa-icon icon="times">
+        </fa-icon>
+      </div>
+    </div>
+    <div *ngIf="adminView" fxLayout="column" fxLayoutAlign="start stretch">
+      <mat-card class="bank" fxLayout="column" fxLayoutAlign="start stretch">
+        <div class="type">Gebucht von: </div>
+        <div fxFlexOffset="10px"  fxLayout="row" fxLayoutAlign="start center">
+          <div class="icon">
+            <fa-icon [icon]="['far','id-card']"></fa-icon>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center start" fxFlexOffset="20px">
+            <div style="font-size: 15px">{{booking.booker.displayName}} aka {{booking.booker.originalDisplayName}}</div>
+            <div fxFlexOffset="4px">Email: {{booking.booker.email}}</div>
+            <div >Zusagestatus: {{booking.booker.zusage}}%</div>
+          </div>
+        </div>
+      </mat-card>
+      <div fxLayout="row" fxLayoutAlign="end center" fxFlexOffset="10px" *ngIf="!booking.paid">
+        <button mat-raised-button="" color="primary" (click)="accept()">Bezahlung bestätigen</button>
+      </div>
+    </div>
+    <div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between stretch" fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px" *ngIf="!booking.paid && !adminView">
+      <mat-card class="bank" fxLayout="column" fxLayoutAlign="start stretch">
+        <div class="type">Banküberweisung</div>
+        <div fxFlexOffset="10px"  fxLayout="row" fxLayoutAlign="start center">
+          <div class="icon">
+            <fa-icon icon="university"></fa-icon>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center start" fxFlexOffset="20px">
+            <div style="font-size: 15px">Jonas Schaltegger</div>
+            <div fxFlexOffset="4px">IBAN: AT76 3928 8000 0001 8341</div>
+            <div>BIC:  RZKTAT2K288</div>
+            <div>Verwendungszweck: {{booking?.bookingId}}</div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="paypal" fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset.gt-sm="5px">
+        <div class="type">PayPal</div>
+        <div fxFlexOffset="10px"  fxLayout="row" fxLayoutAlign="start center">
+          <div class="icon">
+            <fa-icon [icon]="['fab','paypal']"></fa-icon>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center start" fxFlexOffset="20px">
+            <div style="font-size: 15px">Jonas Schaltegger</div>
+            <div fxFlexOffset="4px">Email: jonas.schaltegger@gmail.com</div>
+            <div>Nachricht: {{booking?.bookingId}}</div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</mat-card>
