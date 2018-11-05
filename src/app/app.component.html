@@ -86,6 +86,10 @@
         <a (click)="login();sidenav.close()" *ngIf="!(user|async)" class="menuItem">
           <span >login</span>
         </a>
+        <a class="menuItem update" *ngIf="(update|async)" fxLayout="column" fxLayoutAlign="start center" (click)="reloadPage()" >
+          <fa-icon icon="sync"></fa-icon>
+          <span class="hint">Aktualisieren</span>
+        </a>
       </span>
   </mat-sidenav>
   <mat-sidenav-content (swipeRight)="sidenav.open()" data-mc-options='{ "touchAction": "pan-y" }'>

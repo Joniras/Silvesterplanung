@@ -42,13 +42,16 @@ export class BookingOverviewComponent implements OnInit {
             const person = persons[i];
             for (let j = 0; j < bookings.length; j++) {
               const booking = bookings[j];
-              booking.booker = person.payload.doc.data();
-              booking.booker.path = person.payload.doc.ref.path;
-              booking.dueDate = booking.dueDate.toDate();
-              Allbookings.push(booking);
+              for (let k = 0; k < booking.persons.length; k++) {
+                const bookingElement = booking.persons[k];
+                bookingElement.booker = person.payload.doc.data();
+                bookingElement.booker.path = person.payload.doc.ref.path;
+                bookingElement.dueDate = booking.dueDate.toDate();
+                Allbookings.push(bookingElement);
+              }
             }
-            return Allbookings;
           }
+          return Allbookings;
         }));
       })).subscribe(resolve, reject);
     });
@@ -93,8 +96,7 @@ export class BookingOverviewComponent implements OnInit {
       data: data,
       labels: ['30. Dezember', '31. Dezember'],
       options: {
-        maintainAspectRatio: false,
-        responsive: true
+        maintainAspectRatio: false
       }
     };
   }
@@ -120,7 +122,7 @@ export class BookingOverviewComponent implements OnInit {
       };
       pieData.push(paketData);
     }
-    console.log("All: ",pieData);
+    // console.log("All: ",pieData);
     this.bookingPercentage = pieData;
   }
 }

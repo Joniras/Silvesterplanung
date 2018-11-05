@@ -26,6 +26,7 @@
     <span class="menu">
       <a [routerLink]="['/admin']" routerLinkActive="active" class="menuItem adminButton" *ngIf="user?.admin"><span>Admin</span></a>
       <a [routerLink]="['/prices']" routerLinkActive="active" class="menuItem"><span>Preise</span></a>
+      <a class="menuItem update" matTooltip="Aktualisieren" matTooltipPlacement="below" (click)="reloadPage()" *ngIf="(update|async)"><span><fa-icon icon="sync"></fa-icon></span></a>
       <a [routerLink]="['/book']" routerLinkActive="active" class="menuItem"><span>Buchen</span></a>
       <a [routerLink]="['/wishes']" routerLinkActive="active" class="menuItem"><span>GetrÄnkewÜnsche</span></a>
       <a [routerLink]="['/gallery']" routerLinkActive="active" class="menuItem"><span>Gallerie</span></a>

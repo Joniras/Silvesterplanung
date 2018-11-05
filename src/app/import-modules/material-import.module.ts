@@ -15,7 +15,8 @@ import {
   MatSlideToggleModule,
   MatStepperModule,
   MatTableModule,
-  MatTabsModule
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 import {CommonModule} from '@angular/common';
 
@@ -36,7 +37,8 @@ import {CommonModule} from '@angular/common';
     MatSelectModule,
     MatMenuModule,
     MatStepperModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule
   ],
   exports: [
     MatInputModule,
@@ -54,7 +56,8 @@ import {CommonModule} from '@angular/common';
     MatSelectModule,
     MatMenuModule,
     MatStepperModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule
     ],
   declarations: [
   ],

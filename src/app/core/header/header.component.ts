@@ -4,8 +4,9 @@ import {LoginDialogComponent} from '../login-dialog/login-dialog.component';
 import {AuthService} from '../../services/auth.service';
 import {UserProfile} from '../../other/interfaces';
 import {skip} from 'rxjs/operators';
-import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
-import {faCheckCircle, faCircle, faQuestionCircle, faTimesCircle} from "@fortawesome/free-regular-svg-icons";
+import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
+import {faCheckCircle, faCircle, faQuestionCircle, faTimesCircle} from '@fortawesome/free-regular-svg-icons';
+import {VersionService} from '../../services/version.service';
 
 @Component({
   selector: 'app-header',
@@ -19,8 +20,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public user: UserProfile = null;
   public checkingIfAlreadyLoggedIn = true;
+  public update = null;
 
-  constructor(private authenticator: AuthService, private dialog: MatDialog) {
+  constructor(private authenticator: AuthService, private dialog: MatDialog, private version: VersionService) {
+    this.update = version.$hasNewVersion();
     this.authenticator.getUserObservable().pipe(skip(1)).subscribe(v => {
       this.user = v;
       this.checkingIfAlreadyLoggedIn = false;
@@ -39,6 +42,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+  }
+
+  reloadPage(){
+    document.location.reload();
   }
 
   openNav() {

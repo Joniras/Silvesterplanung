@@ -17,8 +17,17 @@ export class NotificationService {
     });
   }
 
-  public showGCMNotification(payload: {title: string; body: string; icon: string}){
-    console.log("Notification",payload);
+  public showNewVersion() {
+    const notif = this.notifications.create("Neue Version verfügbar", "Klicken um zu aktualisieren", NotificationType.Info, {
+      timeOut: 6000,
+      showProgressBar: true
+    });
+    notif.click.subscribe(v => {
+      document.location.reload();
+    });
+  }
+
+  public showGCMNotification(payload: {title: string; body: string; icon: string}) {
 
     const html = `
       <div class="HTMLnotification">

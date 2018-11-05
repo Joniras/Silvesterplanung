@@ -19,6 +19,9 @@
       text-decoration: none;
       color: white;
       cursor: pointer;
+      &.update{
+        color: #ff6d27;
+      }
       &.adminButton{
         background-color: #1a0023;
         padding: 10px;

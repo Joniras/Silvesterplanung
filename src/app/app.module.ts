@@ -23,6 +23,7 @@ import {registerLocaleData} from '@angular/common';
 import {AdminGuard} from './other/AdminGuard';
 import {MessagingService} from './services/messaging.service';
 import {HammerConfig} from './other/hammer-config';
+import {VersionService} from './services/version.service';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeDE);
@@ -44,13 +45,13 @@ registerLocaleData(localeDE);
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireDatabaseModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AdminGuard, AuthService, MessagingService, NotificationService,{
+  providers: [AdminGuard, AuthService, MessagingService, NotificationService, VersionService, {
     provide: LOCALE_ID,
     useValue: 'de-AT'
-  },{
+  }, {
     provide: HAMMER_GESTURE_CONFIG,
     useClass: HammerConfig,
-  },],
+  }],
   bootstrap: [AppComponent],
   entryComponents: [LoginDialogComponent]
 })
