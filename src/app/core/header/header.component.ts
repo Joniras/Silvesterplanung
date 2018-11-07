@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   reloadPage(){
-    document.location.reload();
+    this.version.update();
   }
 
   openNav() {

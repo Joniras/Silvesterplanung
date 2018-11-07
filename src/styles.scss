@@ -215,3 +215,13 @@ mat-step-header{
     display: none !important;
   }
 }
+
+
+.paypalLink{
+  &:hover{
+    text-decoration: none;
+  }
+  .black{
+    color: black;
+  }
+}

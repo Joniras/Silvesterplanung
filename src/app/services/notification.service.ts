@@ -17,13 +17,13 @@ export class NotificationService {
     });
   }
 
-  public showNewVersion() {
+  public showNewVersion(cb) {
     const notif = this.notifications.create("Neue Version verfügbar", "Klicken um zu aktualisieren", NotificationType.Info, {
       timeOut: 6000,
       showProgressBar: true
     });
-    notif.click.subscribe(v => {
-      document.location.reload();
+    notif.click.subscribe(() => {
+      cb();
     });
   }
 

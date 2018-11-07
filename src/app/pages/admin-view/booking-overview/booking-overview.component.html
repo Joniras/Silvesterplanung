@@ -6,12 +6,21 @@
             [options]="dayChart.options"
             [chartType]="'bar'"></canvas>
   </div>
-  <div fxLayoutAlign="space-between center" fxLayout="row" fxFlexOffset="20px">
-    <canvas fxFlex="20" baseChart *ngFor="let percentage of bookingPercentage"
-            [data]="percentage.data"
-            [labels]="percentage.labels"
-            [options]="percentage.options"
-            [chartType]="'doughnut'"></canvas>
+  <div fxLayoutAlign="start stretch" fxLayout="column" fxFlexOffset="20px">
+    <div *ngFor="let package of bookingPercentage" fxLayout="row" fxLayoutAlign="space-between start" fxFlex="150px">
+      <canvas  baseChart fxFlex="50%"
+               [data]="package.data.day1"
+               [labels]="package.labels"
+               [options]="package.options"
+               [chartType]="'doughnut'">
+      </canvas>
+      <canvas  baseChart fxFlex="50%"
+               [data]="package.data.day2"
+               [labels]="package.labels"
+               [options]="package.options"
+               [chartType]="'doughnut'">
+      </canvas>
+    </div>
   </div>
 </div>
 

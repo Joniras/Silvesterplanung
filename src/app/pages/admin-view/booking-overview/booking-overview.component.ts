@@ -109,16 +109,19 @@ export class BookingOverviewComponent implements OnInit {
     for (let i = 0; i < this.pakete.length; i++) {
       const paketeElement = this.pakete[i];
       const paketData = {
-          data: [paketeElement.current30 + paketeElement.current31, paketeElement.total30 + paketeElement.total31-(paketeElement.current30 + paketeElement.current31)],
-          labels: ['frei', 'gebucht'],
-          options: {
-            maintainAspectRatio: false,
-            responsive: true,
-            title: {
-              display: true,
-              text: paketeElement.title
-            }
+        data: {
+          day1: [paketeElement.current30, paketeElement.total30 - paketeElement.current30],
+          day2: [paketeElement.current31, paketeElement.total31 - +paketeElement.current31]
+        },
+        labels: ['frei', 'gebucht'],
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          title: {
+            display: true,
+            text: paketeElement.title
           }
+        }
       };
       pieData.push(paketData);
     }

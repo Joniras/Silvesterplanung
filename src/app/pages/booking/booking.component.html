@@ -16,7 +16,7 @@
             <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="persons" (ngSubmit)="addRow()">
               <div *ngFor="let person of currentPersons; let i = index" fxLayout="row" fxLayoutAlign="space-between center" [formGroupName]="'person'+person" ngClass.sm="boxShadow" ngClass.lt-sm="boxShadow">
                 <div  fxLayout="column" fxLayoutAlign="start stretch">
-                  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center">
+                  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
                     <mat-form-field fxFlex.gt-sm="150px">
                       <input type="text" matInput="" formControlName="name" class="black" minlength="2" required placeholder="Name">
                       <mat-error >
@@ -181,18 +181,20 @@
             <div class="or" fxFlexOffset="5px">
               oder
             </div>
-            <mat-card class="paypal" fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="5px">
-              <div class="type">PayPal</div>
-              <div fxFlexOffset="10px"  fxLayout="row" fxLayoutAlign="start center">
-                <div class="icon">
-                  <fa-icon [icon]="['fab','paypal']"></fa-icon>
+            <mat-card class="paypal" fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="5px" >
+              <a [href]="'https://paypal.me/JonasSchaltegger/'+currentBooking?.price" target="_blank" class="paypalLink" fxFlex="100" fxLayout="column" fxLayoutAlign="start stretch">
+                <div class="type">PayPal</div>
+                <div fxFlexOffset="10px"  fxLayout="row" fxLayoutAlign="start center">
+                  <div class="icon">
+                    <fa-icon [icon]="['fab','paypal']"></fa-icon>
+                  </div>
+                  <div fxLayout="column" fxLayoutAlign="center start" fxFlexOffset="20px" class="black">
+                    <div style="font-size: 15px">Jonas Schaltegger</div>
+                    <div fxFlexOffset="4px">Email: jonas.schaltegger@gmail.com</div>
+                    <div>Nachricht: {{currentBooking?.bookingId}}</div>
+                  </div>
                 </div>
-                <div fxLayout="column" fxLayoutAlign="center start" fxFlexOffset="20px">
-                  <div style="font-size: 15px">Jonas Schaltegger</div>
-                  <div fxFlexOffset="4px">Email: jonas.schaltegger@gmail.com</div>
-                  <div>Nachricht: {{currentBooking?.bookingId}}</div>
-                </div>
-              </div>
+              </a>
             </mat-card>
             <div class="total" fxFlexOffset="10px" >
               <div class="price">{{currentBooking?.price | currency: 'EUR'}}</div>

@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   public user = null;
   public showUpdate = false;
   public update = null;
+  public updating: any;
 
   constructor(
     private authService: AuthService,
@@ -29,13 +30,13 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private db: AngularFireDatabase,
     private updates: SwUpdate,
     private versionService: VersionService) {
+    this.updating = this.versionService.$updating();
     this.user = authService.getUserObservable();
-    updates.available.subscribe(event => {
-      updates.activateUpdate().then(() => {
-        this.showUpdate = true;
-      });
-    });
     this.update = this.versionService.$hasNewVersion();
+    updates.available.subscribe((event) => {
+      console.log(event);
+      this.showUpdate = true;
+    });
   }
 
   login() {
@@ -59,14 +60,14 @@ export class AppComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
     if (this.showUpdate) {
       this.showUpdate = false;
-      setTimeout(()=>{
+      setTimeout(() => {
         this.versionService.hasUpdate();
-      },200);
+      }, 200);
     }
   }
 
-  reloadPage() {
-    document.location.reload();
+  updateVersion() {
+    this.versionService.update();
   }
 }
 
