@@ -6,6 +6,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
+  MatExpansionModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
@@ -38,7 +39,8 @@ import {CommonModule} from '@angular/common';
     MatMenuModule,
     MatStepperModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ],
   exports: [
     MatInputModule,
@@ -57,7 +59,8 @@ import {CommonModule} from '@angular/common';
     MatMenuModule,
     MatStepperModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
     ],
   declarations: [
   ],

@@ -14,7 +14,8 @@
         </mat-card>
       </div>
       <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px">
-        <div class="wish" *ngFor="let wish of wishes|async; index as i" fxLayout="row" fxLayoutAlign="start stretch" fxFlexOffset="5px" >
+        <div class="wish" *ngFor="let wish of wishes|async; index as i" fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="5px" >
+          <div fxFlex="40px" class="bought"><span *ngIf="wish.bought" ><fa-icon icon="check"></fa-icon></span></div>
         <span class="votes" fxFlexOffset="10px" fxLayout="row" fxLayoutAlign="start center" (click)="like(wish)">
           <span class="heart" [tooltip]="(wish.votes | async)?.voterNames" tooltipPlacement="bottom">
             <fa-icon icon="heart" [ngClass]="{'voted': (wish.votes|async)?.vote}" [@voted]="(wish.votes|async)?.vote? 'yes':'no'"></fa-icon>
@@ -26,7 +27,6 @@
           <span class="creator" fxFlex="30px" fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="20px" >
           <span class="creatorImg" fxLayout="row" fxLayoutAlign="start center" [title]="wish.creator?.displayName">
             <img [src]="wish.creator?.photoUrl">
-
           </span>
         </span>
           <span class="colon" fxLayoutAlign="start center" fxFlexOffset="10px">

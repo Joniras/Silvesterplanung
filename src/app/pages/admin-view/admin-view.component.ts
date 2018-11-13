@@ -7,6 +7,7 @@ import {forkJoin, of} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {NotificationType} from 'angular2-notifications';
 import {NotificationService} from '../../services/notification.service';
+import {MatCheckboxChange} from "@angular/material";
 
 @Component({
   selector: 'app-admin-view',
@@ -63,6 +64,7 @@ export class AdminViewComponent implements OnInit {
         const wishData: any = joinedData.wishes[i].payload.doc.data();
         wishes.push({
           name: wishData.name,
+          bought: wishData.bought,
           creator: joinedData.data[i].data(),
           ref: joinedData.wishes[i].payload.doc.ref
         });
@@ -146,4 +148,7 @@ export class AdminViewComponent implements OnInit {
   }
 
 
+  boughtChanged(wish, $event: MatCheckboxChange) {
+    this.fs.doc(wish.ref).update({bought: $event.checked});
+  }
 }

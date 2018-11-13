@@ -106,6 +106,7 @@ export class DrinkWishesComponent implements OnInit {
         }), shareReplay(1));
         wishes.push({
           name: wishData.name,
+          bought: wishData.bought,
           creator: joinedData.data[i].data(),
           votes: voterObs,
           path: joinedData.wishes[i].payload.doc.ref.path

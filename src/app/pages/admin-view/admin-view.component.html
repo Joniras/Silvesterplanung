@@ -1,22 +1,21 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%" id="wishes">
   <div fxLayout="column" fxLayoutAlign="start stretch" >
-    <mat-card class="lessPadding">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="title">GetrÄnkewÜnsche</mat-expansion-panel-header>
       <div fxLayout="column" fxLayoutAlign="start stretch" >
-        <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
-          <div class="title">GetrÄnkewÜnsche</div>
-        </div>
         <span *ngFor="let wish of (wishes|async)" fxFlexOffset="8px">
           <button (click)="deleteWish(wish)" color="warn" class="deleteButton"><fa-icon icon="times"></fa-icon></button>
-          {{wish.name}} von "{{wish.creator.originalDisplayName}}" || "{{wish.creator.displayName}}"
+          <mat-checkbox matTooltip="Gekauft" [checked]="wish.bought" (change)="boughtChanged(wish,$event)"></mat-checkbox>
+          <span style="font-size:17px; font-weight: bold">{{wish.name}}</span> von "{{wish.creator.originalDisplayName}}" || "{{wish.creator.displayName}}"
         </span>
       </div>
-    </mat-card>
-    <span fxFlexOffset="10px">&nbsp;</span>
+      <span fxFlexOffset="10px">&nbsp;</span>
+    </mat-expansion-panel>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start stretch" >
-    <mat-card class="lessPadding">
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="title">Notifications</mat-expansion-panel-header>
       <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
-        <div class="title">Notifications</div>
         <form fxLayout="column" fxLayoutAlign="start start" (ngSubmit)="addNotificationWithForm(addForm)" #addForm="ngForm">
             <mat-form-field>
               <mat-select placeholder="Wähle ein oder mehrere Empfänger aus" [multiple]="true" ngModel="" name="users">
@@ -37,11 +36,20 @@
             <button mat-raised-button="" type="submit" color="primary">Senden</button>
           </form>
       </div>
-    </mat-card>
+    </mat-expansion-panel>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start stretch">
-    <div class="title">Reservierungen</div>
-    <app-booking-overview></app-booking-overview>
-    <app-booking-view *ngFor="let booking of bookings; let i = index" [booking]="booking" (cancelBooking)="cancelBooking(booking,i)"   (acceptBooking)="acceptBooking(booking)" [adminView]="true" fxFlexOffset="10px"></app-booking-view>
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="title">Reservierungen</mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutAlign="start stretch" >
+      <mat-expansion-panel>
+        <mat-expansion-panel-header class="title">Statistiken</mat-expansion-panel-header>
+        <app-booking-overview></app-booking-overview>
+      </mat-expansion-panel>
+        <div fxLayout="column" fxLayoutAlign="start stretch" >
+          <app-booking-view *ngFor="let booking of bookings; let i = index" [booking]="booking" (cancelBooking)="cancelBooking(booking,i)"   (acceptBooking)="acceptBooking(booking)" [adminView]="true" fxFlexOffset="10px"></app-booking-view>
+        </div>
+      </div>
+    </mat-expansion-panel>
   </div>
 </div>
