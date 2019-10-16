@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
   <div *ngIf="(!user && !checkingIfAlreadyLoggedIn)|| (user && user.zusage==undefined)" class="statusHint"
        ngClass.gt-xs="bigText" fxLayout="row" fxLayoutAlign.gt-sm="space-between center" fxLayoutAlign="center center"
-       (click)="login()">
+       (click)="!user?login():undefined">
     <span fxFlex="10" fxShow.gt-sm="" fxHide>&nbsp;</span>
     <span class="hintText" fxFlex="auto" fxLayout="row" fxLayoutAlign="center center">
       <span *ngIf="!user">
