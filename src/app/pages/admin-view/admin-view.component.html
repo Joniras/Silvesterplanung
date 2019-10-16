@@ -1,12 +1,14 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%" id="wishes">
-  <div fxLayout="column" fxLayoutAlign="start stretch" >
+  <div fxLayout="column" fxLayoutAlign="start stretch">
     <mat-expansion-panel>
       <mat-expansion-panel-header class="title">GetrÄnkewÜnsche</mat-expansion-panel-header>
-      <div fxLayout="column" fxLayoutAlign="start stretch" >
+      <div fxLayout="column" fxLayoutAlign="start stretch">
         <span *ngFor="let wish of (wishes|async)" fxFlexOffset="8px">
           <button (click)="deleteWish(wish)" color="warn" class="deleteButton"><fa-icon icon="times"></fa-icon></button>
-          <mat-checkbox matTooltip="Gekauft" [checked]="wish.bought" (change)="boughtChanged(wish,$event)"></mat-checkbox>
-          <span style="font-size:17px; font-weight: bold">{{wish.name}}</span> von "{{wish.creator.originalDisplayName}}" || "{{wish.creator.displayName}}"
+          <mat-checkbox matTooltip="Gekauft" [checked]="wish.bought"
+                        (change)="boughtChanged(wish,$event)"></mat-checkbox>
+          <span style="font-size:17px; font-weight: bold">{{wish.name}}</span> von "{{wish.creator.originalDisplayName}}
+          " || "{{wish.creator.displayName}}"
         </span>
       </div>
       <span fxFlexOffset="10px">&nbsp;</span>
@@ -15,15 +17,16 @@
   <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px">
     <mat-expansion-panel>
       <mat-expansion-panel-header class="title">Notifications</mat-expansion-panel-header>
-      <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
-        <form fxLayout="column" fxLayoutAlign="start start" (ngSubmit)="addNotificationWithForm(addForm)" #addForm="ngForm">
-            <mat-form-field>
-              <mat-select placeholder="Wähle ein oder mehrere Empfänger aus" [multiple]="true" ngModel="" name="users">
-                <mat-option *ngFor="let user of users|async" [value]="user.uid">
-                  {{user.originalDisplayName}} ({{user.email}})
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+      <div fxFlexOffset="10px" fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
+        <form fxLayout="column" fxLayoutAlign="start start" (ngSubmit)="addNotificationWithForm(addForm)"
+              #addForm="ngForm">
+          <mat-form-field>
+            <mat-select placeholder="Wähle ein oder mehrere Empfänger aus" [multiple]="true" ngModel="" name="users">
+              <mat-option *ngFor="let user of users|async" [value]="user.uid">
+                {{user.originalDisplayName}} ({{user.email}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
           <mat-form-field>
             <input type="text" matInput="" required minlength="3" placeholder="Titel" name="title" ngModel="">
           </mat-form-field>
@@ -33,22 +36,33 @@
           <mat-form-field>
             <input type="text" matInput="" placeholder="Url eines Bildes" name="img" ngModel="">
           </mat-form-field>
-            <button mat-raised-button="" type="submit" color="primary">Senden</button>
-          </form>
+          <button mat-raised-button="" type="submit" color="primary">Senden</button>
+        </form>
       </div>
     </mat-expansion-panel>
   </div>
   <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px">
     <mat-expansion-panel>
       <mat-expansion-panel-header class="title">Reservierungen</mat-expansion-panel-header>
-      <div fxLayout="column" fxLayoutAlign="start stretch" >
-      <mat-expansion-panel>
-        <mat-expansion-panel-header class="title">Statistiken</mat-expansion-panel-header>
-        <app-booking-overview></app-booking-overview>
-      </mat-expansion-panel>
-        <div fxLayout="column" fxLayoutAlign="start stretch" >
-          <app-booking-view *ngFor="let booking of bookings; let i = index" [booking]="booking" (cancelBooking)="cancelBooking(booking,i)"   (acceptBooking)="acceptBooking(booking)" [adminView]="true" fxFlexOffset="10px"></app-booking-view>
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="title">Statistiken</mat-expansion-panel-header>
+          <app-booking-overview></app-booking-overview>
+        </mat-expansion-panel>
+        <div fxLayout="column" fxLayoutAlign="start stretch">
+          <app-booking-view *ngFor="let booking of bookings; let i = index" [booking]="booking"
+                            (cancelBooking)="cancelBooking(booking,i)" (acceptBooking)="acceptBooking(booking)"
+                            [adminView]="true" fxFlexOffset="10px"></app-booking-view>
         </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="10px">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="title">Reset</mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <button mat-raised-button (click)="resetYear()">Reset</button>
       </div>
     </mat-expansion-panel>
   </div>

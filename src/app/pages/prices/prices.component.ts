@@ -9,6 +9,7 @@ import {take} from 'rxjs/operators';
 })
 export class PricesComponent implements OnInit {
   public data2017 = TableData2017;
+  public data2018 = TableData2018;
   public currentData = [];
   public displayedColumns: string[] = ['title', 'desc', 'price1', 'price2', 'priceWoAlcohol1', 'priceWoAlcohol2', 'current30', 'current31'];
   public displayedColumnsPast: string[] = ['title', 'desc', 'price1', 'price2', 'priceWoAlcohol1', 'priceWoAlcohol2'];

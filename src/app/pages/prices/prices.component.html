@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" style="min-height: 100%">
   <div fxLayout="column" fxLayoutAlign="start stretch">
     <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
-      <div class="title">PreisLisTe 2018</div>
+      <div class="title">PreisLisTe 2019</div>
     </div>
     <mat-card class="tableCard">
       <div fxLayout="column" fxLayoutAlign="start stretch">
@@ -51,6 +51,50 @@
     <div fxFlexOffset="10px">
       Auf Anfrage können auch mehr Plätze zur Verfügung gestellt werden
     </div>
+  </div>
+
+
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="30px">
+    <div fxFlexOffset="10px"  fxLayout="column" fxLayoutAlign="start center" fxLayoutAlign.gt-sm="start stretch">
+      <div class="title">PreisLisTe 2018</div>
+    </div>
+    <mat-card class="tableCard">
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="formContainer">
+          <table mat-table [dataSource]="data2018" fxFlexOffset="10px" style="">
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+            <ng-container matColumnDef="desc">
+              <th mat-header-cell *matHeaderCellDef> Beschreibung </th>
+              <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price1">
+              <th mat-header-cell *matHeaderCellDef > 1 x Tag & Nacht </th>
+              <td mat-cell *matCellDef="let element"> {{element.price1 | currency:'EUR'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price2">
+              <th mat-header-cell *matHeaderCellDef> 2 x Tag & Nacht </th>
+              <td mat-cell *matCellDef="let element"> {{element.price2 | currency:'EUR'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="priceWoAlcohol1">
+              <th mat-header-cell *matHeaderCellDef> 1 x Tag & Nacht (ohne Alkohol)</th>
+              <td mat-cell *matCellDef="let element"> {{element.priceWoAlcohol1 | currency:'EUR'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="priceWoAlcohol2">
+              <th mat-header-cell *matHeaderCellDef> 2 x Tag & Nacht (ohne Alkohol)</th>
+              <td mat-cell *matCellDef="let element"> {{element.priceWoAlcohol2 | currency:'EUR'}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsPast"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsPast;"></tr>
+          </table>
+        </div>
+        <div fxLayoutAlign="start center" fxLayout="row" fxFlexOffset="10px">
+          <div class="credits" >Paketnamen by Gerhard Stingl</div>
+        </div>
+      </div>
+    </mat-card>
   </div>
 
   <div fxLayout="column" fxLayoutAlign="start stretch" fxFlexOffset="30px">

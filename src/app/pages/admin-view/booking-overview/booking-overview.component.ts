@@ -16,7 +16,7 @@ export class BookingOverviewComponent implements OnInit {
   public bookingPercentage: any[] = [];
 
   constructor(private fs: AngularFirestore) {
-    this.getBookings().then(v => {
+    this.getBookings().then((v: any) => {
       this.bookings = v;
       this.getDayChartData();
       this.getPakete().then(() => {
@@ -38,7 +38,7 @@ export class BookingOverviewComponent implements OnInit {
         return forkJoin(bookingPromises).pipe(map(bookings2 => {
           const Allbookings = [];
           for (let i = 0; i < persons.length; i++) {
-            const bookings = bookings2[i];
+            const bookings: any = bookings2[i];
             const person = persons[i];
             for (let j = 0; j < bookings.length; j++) {
               const booking = bookings[j];

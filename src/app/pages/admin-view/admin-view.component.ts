@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AuthService} from '../../services/auth.service';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {map, switchMap, take} from 'rxjs/operators';
+import {last, map, switchMap, take} from 'rxjs/operators';
 import {forkJoin, of} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {NotificationType} from 'angular2-notifications';
@@ -117,7 +117,7 @@ export class AdminViewComponent implements OnInit {
 
   updatePackagePlaces(persons, add) {
     return new Promise((resolve, reject) => {
-      this.fs.collection('rest-places').snapshotChanges().pipe(take(1)).subscribe((packageInfo:any) => {
+      this.fs.collection('rest-places').snapshotChanges().pipe(take(1)).subscribe((packageInfo: any) => {
         const packageRef = packageInfo[0].payload.doc.ref;
         packageInfo = packageInfo[0].payload.doc.data();
         for (const person of persons) {
@@ -151,4 +151,65 @@ export class AdminViewComponent implements OnInit {
   boughtChanged(wish, $event: MatCheckboxChange) {
     this.fs.doc(wish.ref).update({bought: $event.checked});
   }
+
+  resetYear() {
+    if (confirm("Willst du wirklich einen reset der Daten machen um ein neues Silvester zu planen ?")) {
+      this.resetDrinkWishes().then(() => {
+        console.log("Reset Drink Wishes successfully ");
+        this.resetUsers().then(() => {
+          console.log("Reset Users successfully");
+          this.resetBookings().then(()=>{
+            console.log("Reset Bookings successfully");
+          });
+        });
+      });
+    }
+  }
+
+  resetDrinkWishes() {
+    return new Promise((resolve, reject) => {
+      this.fs.collection("drink-wishes").get({}).subscribe((wishes) => {
+        wishes.docs.forEach((wish, index) => {
+          this.fs.collection("drink-wishes" + this.getPastYear()).add(wish.data()).then(() => {
+            this.fs.doc(wish.ref.path).delete();
+            resolve();
+          });
+        });
+      });
+    });
+  }
+
+  resetUsers() {
+    return new Promise((resolve, reject) => {
+      this.fs.collection("users").get().subscribe((users) => {
+          users.forEach(result => {
+            this.fs.doc(result.ref.path).update({zusage: 0, zusageUpdate: null}).then(() => {
+              resolve();
+            });
+          });
+        }
+      );
+    });
+  }
+
+  resetBookings() {
+    return new Promise((resolve, reject) => {
+      this.fs.collection("users").get().subscribe((users) => {
+        users.forEach(user => {
+          this.fs.collection(user.ref.path + "/bookings").get().subscribe(bookings => {
+            bookings.forEach(booking => {
+              this.fs.doc(booking.ref.path).delete();
+              resolve();
+            });
+          });
+        });
+      });
+    });
+  }
+
+  getPastYear() {
+    const lastYear = new Date().getFullYear();
+    return (lastYear) + "_" + (lastYear + 1);
+  }
+
 }
