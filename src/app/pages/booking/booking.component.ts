@@ -106,12 +106,14 @@ export class BookingComponent implements OnInit {
       this.overviewPrice = 0;
       for (let rawValueKey in this.persons.getRawValue()) {
         const person = this.persons.getRawValue()[rawValueKey];
-        console.log('person: ', person);
+        //console.log('person: ', person);
+        console.log(person.package);
         if (person.package) {
           person.package = person.package.title;
         } else {
-          person.package = 'Hobo';
+          person.package = 'Gamma';
         }
+        console.log(person);
         if (person.nights == 2) {
           person.startNight = 30;
         }
@@ -160,11 +162,14 @@ export class BookingComponent implements OnInit {
   }
 
   private calculatePrice(person: any) {
+    console.log(this.packageInfoOriginal);
     const pack = this.packageInfoOriginal[person.package];
     let priceString = 'price';
     if (!person.alcohol) {
       priceString += 'WoAlcohol';
     }
+    console.log(person.nights);
+    console.log(pack);
     priceString += person.nights;
     return pack[priceString];
   }
@@ -217,7 +222,7 @@ export class BookingComponent implements OnInit {
       }
     } else {
       if (fg.get('noSleep').value) {
-        fg.get('package').patchValue({title: 'Hobo'});
+        fg.get('package').patchValue({title: 'Gamma'});
       }
       fg.get('nights').enable();
       fg.get('startNight').enable();
